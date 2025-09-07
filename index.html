@@ -2,109 +2,544 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Modern One-Page — GitHub Pages Ready</title>
+  <title>Bozhidar — Software Engineering Student</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hello! I'm Bozhidar, a 27-year-old software engineering student. This is my modern, responsive portfolio." />
+  <meta property="og:title" content="Bozhidar — Software Engineering Student" />
+  <meta property="og:description" content="Modern, responsive portfolio for Bozhidar." />
   <meta name="theme-color" content="#0ea5e9" />
-  <meta name="description" content="A modern, cool, responsive one-page portfolio ready for GitHub Pages. All HTML, CSS, and JS in a single file." />
-
   <style>
-    /* --------- CSS RESET (lightweight) --------- */
-    *,*::before,*::after{box-sizing:border-box}
-    *{margin:0}
-    html:focus-within{scroll-behavior:smooth}
-    body{min-height:100vh;text-rendering:optimizeLegibility;line-height:1.6}
-    img,svg,video,canvas,audio,iframe,embed,object{display:block;max-width:100%}
-    input,button,textarea,select{font:inherit}
+    /* ========= CSS RESET ========= */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+    html, body { height: 100%; }
+    body { line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; padding: 0; }
+    /* ========= THEME ========= */
     :root {
-      --bg: #0b1020;
-      --bg-soft: #0e152b;
-      --text: #e6edf6;
-      --muted: #9fb3c8;
-      --card: #121a33;
-      --border: #24304d;
-      --primary: #0ea5e9;
-      --primary-600:#0284c7;
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --text: #eef2ff;
+      --muted: #a5b4fc;
+      --brand: #0ea5e9;
+      --brand-2: #22d3ee;
       --accent: #a78bfa;
-      --ok: #22c55e;
-      --warn: #f59e0b;
-      --shadow: 0 10px 30px rgba(2, 132, 199, .25);
-      --radius: 16px;
-      --radius-lg: 22px;
-      --container: 1200px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --ok: #34d399;
+      --danger: #fb7185;
+      --ring: 0 0 0 6px rgba(14,165,233,.15);
+      --shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.04);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      --grad: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.25), transparent 40%),
+              radial-gradient(1000px 500px at -10% 10%, rgba(167,139,250,.25), transparent 40%),
+              radial-gradient(900px 500px at 50% 120%, rgba(14,165,233,.25), transparent 50%);
     }
-    /* Light theme */
-    :root[data-theme="light"]{
-      --bg:#f7fafc; --bg-soft:#f2f6fb;
-      --text:#0b1020; --muted:#4b5563;
-      --card:#ffffff; --border:#e5e7eb;
-      --primary:#0ea5e9; --primary-600:#0284c7;
-      --accent:#7c3aed; --shadow:0 12px 28px rgba(2,132,199,.18);
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --panel: rgba(15,23,42,0.06);
+        --text: #0b1220;
+        --muted: #334155;
+        --shadow: 0 10px 30px rgba(2,6,23,.06), inset 0 0 0 1px rgba(2,6,23,.08);
+        --grad: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.25), transparent 40%),
+                radial-gradient(1000px 500px at -10% 10%, rgba(167,139,250,.24), transparent 40%);
+      }
     }
-
-    body{
-      font-family:var(--font);
-      background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(14,165,233,.18), transparent 60%),
-        radial-gradient(900px 500px at 10% -10%, rgba(167,139,250,.18), transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
-      color:var(--text);
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --panel: rgba(15,23,42,0.06);
+      --text: #0b1220;
+      --muted: #334155;
+      --shadow: 0 10px 30px rgba(2,6,23,.06), inset 0 0 0 1px rgba(2,6,23,.08);
+      --grad: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.25), transparent 40%),
+              radial-gradient(1000px 500px at -10% 10%, rgba(167,139,250,.24), transparent 40%);
     }
-
-    .container{width:100%;max-width:var(--container);margin-inline:auto;padding: clamp(16px, 3vw, 32px);}
-    section{padding: clamp(48px, 8vw, 96px) 0;}
-    .section-title{
-      font-size:clamp(28px, 4vw, 40px);
-      letter-spacing:.3px;
-      margin-bottom:clamp(14px, 1.2vw, 18px);
-      font-weight:800;
+    /* ========= BASE ========= */
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      background-image: var(--grad);
+      overflow-x: hidden;
     }
-    .section-sub{
-      color:var(--muted);
-      margin-bottom:clamp(24px, 2vw, 32px);
-      max-width:60ch;
-    }
-
-    /* --------- NAV --------- */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(12px);
-      background: color-mix(in srgb, var(--bg), transparent 35%);
-      border-bottom:1px solid var(--border);
-    }
-    .nav{
-      display:flex;align-items:center;gap:18px;justify-content:space-between;
-      min-height:64px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background: conic-gradient(from 180deg, var(--primary), var(--accent));
+    .container { width: min(1200px, 92%); margin-inline: auto; }
+    .glass {
+      background: var(--panel);
+      backdrop-filter: blur(8px);
       box-shadow: var(--shadow);
+      border-radius: var(--radius);
     }
-    .brand span{font-weight:800;letter-spacing:.4px}
-    .nav ul{display:flex;gap:16px;list-style:none;align-items:center}
-    .nav a{color:var(--muted);text-decoration:none;font-weight:600}
-    .nav a:hover{color:var(--text)}
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      border:1px solid var(--border);
-      padding:.6rem .95rem;border-radius:12px;
-      background:linear-gradient(180deg, color-mix(in srgb, var(--card), white 4%), var(--card));
-      color:var(--text);text-decoration:none;font-weight:700;
-      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+    .tag {
+      padding: .35rem .7rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(14,165,233,.25), rgba(167,139,250,.25));
+      font-size: .8rem; white-space: nowrap;
+      border: 1px solid rgba(255,255,255,.08);
     }
-    .btn:hover{transform: translateY(-1px);box-shadow: var(--shadow);border-color: color-mix(in srgb, var(--primary), var(--border) 60%)}
-    .btn.primary{
-      background: linear-gradient(180deg, color-mix(in srgb, var(--primary), white 22%), var(--primary));
-      color:white;border-color: color-mix(in srgb, var(--primary), black 18%);
-      text-shadow:0 1px 0 rgba(0,0,0,.2);
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .9rem 1.1rem; border-radius: 14px; border: 0;
+      color: white; cursor: pointer; font-weight: 600;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 10px 20px rgba(14,165,233,.35), inset 0 0 0 1px rgba(255,255,255,.12);
+      transition: transform .15s ease, box-shadow .2s ease, opacity .2s ease;
     }
-    .btn.ghost{background:transparent}
-    .theme-toggle, .menu-toggle{
-      border:1px solid var(--border);
-      background:var(--card);
-      width:40px;height:40px;border-radius:12px;
-      display:grid;place-items:ce
+    .btn:focus-visible { outline: none; box-shadow: var(--ring); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.secondary {
+      background: transparent; color: var(--text);
+      border: 1px dashed rgba(255,255,255,.25);
+    }
+    .section { padding: 96px 0; scroll-margin-top: 88px; }
+    .title {
+      font-size: clamp(1.6rem, 2.5vw + .6rem, 2.6rem);
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    .muted { color: var(--muted); }
+    /* ========= NAV ========= */
+    header {
+      position: sticky; top: 0; z-index: 40; backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.25), transparent);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 14px 0;
+    }
+    .brand { display:flex; align-items:center; gap:.7rem; font-weight:800; letter-spacing:.5px }
+    .brand .logo {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: conic-gradient(from 220deg at 50% 50%, var(--brand), var(--accent), var(--brand-2));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+    }
+    nav ul { display: flex; gap: .6rem; align-items: center; }
+    nav a {
+      padding: .6rem .9rem; border-radius: 10px; font-weight: 600; font-size: .95rem;
+      color: var(--muted);
+    }
+    nav a.active, nav a:hover { color: var(--text); background: var(--panel); }
+    .nav-actions { display:flex; align-items:center; gap:.6rem }
+    .theme-toggle, .menu-toggle {
+      border: 1px solid rgba(255,255,255,.14); background: var(--panel);
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 12px; cursor: pointer;
+    }
+    .menu-toggle { display: none; }
+    /* ========= HERO ========= */
+    .hero {
+      display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: center;
+      padding: 60px 0 24px;
+    }
+    .hero-card { padding: 28px; position: relative; overflow: hidden; }
+    .hero-eyebrow { display:flex; gap:.6rem; align-items:center; margin-bottom: 12px; }
+    .hero h1 { font-size: clamp(2rem, 4.4vw + 1rem, 4rem); line-height: 1.05; letter-spacing:-.03em; }
+    .hero p { font-size: clamp(1rem, .6vw + .9rem, 1.2rem); color: var(--muted); margin-top: 12px; }
+    .hero-cta { display:flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .stats { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
+    .stat {
+      padding: 14px; text-align:center; border-radius: 14px; background: var(--panel);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+    .stat strong { font-size: 1.2rem; display:block; }
+    .card-portrait {
+      min-height: 320px; padding: 16px; display:grid; gap: 12px; align-content: space-between;
+      background:
+        radial-gradient(800px 300px at 20% 10%, rgba(34,211,238,.25), transparent 50%),
+        radial-gradient(500px 250px at 90% 40%, rgba(167,139,250,.25), transparent 50%), var(--panel);
+      border: 1px solid rgba(255,255,255,.09);
+    }
+    .badge-row { display:flex; flex-wrap: wrap; gap: 8px; }
+    /* ========= GRID CARDS ========= */
+    .grid { display: grid; gap: 18px; }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .card { padding: 22px; border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,.08); }
+    .card h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); }
+    /* ========= SKILLS ========= */
+    .skills { display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .chip {
+      border: 1px solid rgba(255,255,255,.14);
+      padding: .55rem .8rem; border-radius: 999px; background: rgba(255,255,255,.06);
+      font-weight: 600; font-size: .92rem;
+    }
+    .meter {
+      height: 10px; border-radius: 999px; background: rgba(255,255,255,.12); overflow: hidden;
+      margin-top: 8px; outline: 1px solid rgba(255,255,255,.08);
+    }
+    .meter > span {
+      display:block; height:100%;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+    }
+    /* ========= TIMELINE ========= */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.12);
+    }
+    .t-item { position: relative; padding-left: 18px; margin-bottom: 18px; }
+    .t-item::before {
+      content: ""; position: absolute; left: -1px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 0 0 3px rgba(14,165,233,.25);
+    }
+    /* ========= CONTACT ========= */
+    form {
+      display: grid; gap: 12px; margin-top: 10px;
+    }
+    input, textarea {
+      padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14); color: var(--text);
+    }
+    input:focus, textarea:focus { outline: none; box-shadow: var(--ring); }
+    textarea { min-height: 140px; resize: vertical; }
+    .note { font-size: .9rem; color: var(--muted); }
+    /* ========= FOOTER ========= */
+    footer { padding: 40px 0; color: var(--muted); }
+    .socials { display:flex; gap: 10px; }
+    .icon-btn {
+      width: 40px; height: 40px; display:grid; place-items:center; border-radius: 10px;
+      background: var(--panel); border: 1px solid rgba(255,255,255,.14);
+      transition: transform .15s ease;
+    }
+    .icon-btn:hover { transform: translateY(-2px); }
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .menu-toggle { display: grid; }
+      nav ul { position: absolute; top: 62px; left: 0; right: 0; display: none; padding: 10px; }
+      nav ul.open { display: grid; grid-template-columns: 1fr; gap: 8px; }
+      nav a { background: var(--panel); border: 1px solid rgba(255,255,255,.12); }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+    }
+    /* ========= ANIMATIONS ========= */
+    @keyframes float { from { transform: translateY(0) } 50% { transform: translateY(-6px) } to { transform: translateY(0) } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .shine {
+      position: relative; overflow: hidden;
+    }
+    .shine::after {
+      content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
+      animation: shine 2.8s infinite;
+    }
+    @keyframes shine { to { transform: translateX(120%);} }
+    .kbd { font-family: var(--mono); font-size: .85rem; padding: .15rem .4rem; border-radius: 6px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); }
+  </style>
+</head>
+<body>
+  <!-- ====== NAV ====== -->
+  <header class="glass">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo float" aria-hidden="true"></div>
+        <a href="#home" class="title" style="font-size:1.15rem">Bozhidar</a>
+        <span class="tag" aria-label="status">Software Engineering Student</span>
+      </div>
+      <nav>
+        <button class="menu-toggle" aria-label="Open menu" title="Menu">
+          <!-- Hamburger -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <ul id="navList" class="glass">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+          <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95l-1.414 1.414" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <a class="btn secondary" href="#contact">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+          Contact
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <main id="home" class="container section" style="padding-top:42px">
+    <section class="hero">
+      <div class="hero-card glass shine">
+        <div class="hero-eyebrow">
+          <span class="tag">Hello! I’m Bozhidar 👋</span>
+          <span class="tag">27 y/o</span>
+          <span class="tag">Based in Europe</span>
+        </div>
+        <h1>
+          Building my future in <span style="background:linear-gradient(90deg,var(--brand),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent">Software Engineering</span>
+        </h1>
+        <p>
+          I’m a 27-year-old software engineering student who loves clean code, clever UX, and shipping things that actually work.
+          This site highlights what I’m learning, what I’ve built, and where I’m headed.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="#projects" aria-label="View projects">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            See Projects
+          </a>
+          <a class="btn secondary" href="#about">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v8M12 8h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            More About Me
+          </a>
+          <span class="note">Tip: press <span class="kbd">T</span> to toggle theme.</span>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <strong>+200 hrs</strong>
+            <div class="muted">of coding practice</div>
+          </div>
+          <div class="stat">
+            <strong>5+</strong>
+            <div class="muted">mini projects</div>
+          </div>
+          <div class="stat">
+            <strong>∞</strong>
+            <div class="muted">curiosity</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card-portrait glass">
+        <div>
+          <h3 class="muted" style="font-weight:800">Focus areas</h3>
+          <div class="badge-row" style="margin-top:8px">
+            <span class="tag">C# / .NET</span>
+            <span class="tag">Web</span>
+            <span class="tag">APIs</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="muted" style="font-weight:800">Currently learning</h3>
+          <p class="muted" style="margin-top:6px">
+            Data structures, object-oriented design, and building end-to-end web apps with modern tooling.
+          </p>
+        </div>
+        <div class="badge-row">
+          <span class="tag">Open to internships</span>
+          <span class="tag">Team player</span>
+          <span class="tag">Fast learner</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about" class="section">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2 class="title">About me</h2>
+        <p class="muted" style="margin-top:10px">
+          Hey! I’m Bozhidar — a 27-year-old software engineering student with a practical mindset and a passion for building.
+          I enjoy turning complex problems into simple, beautiful, and intuitive solutions.
+          I’m particularly excited about backend logic, clean APIs, and performant UIs.
+        </p>
+        <div class="skills">
+          <span class="chip">Problem Solving</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Agile</span>
+          <span class="chip">Code Reviews</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.1rem">Toolbox</h3>
+        <div class="skills">
+          <span class="chip">C#</span>
+          <span class="chip">.NET</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">REST</span>
+        </div>
+        <div style="margin-top:16px">
+          <div>Backend</div>
+          <div class="meter" aria-label="Backend proficiency"><span style="width:78%"></span></div>
+          <div style="margin-top:10px">Frontend</div>
+          <div class="meter" aria-label="Frontend proficiency"><span style="width:65%"></span></div>
+          <div style="margin-top:10px">Databases</div>
+          <div class="meter" aria-label="DB proficiency"><span style="width:72%"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SKILLS ====== -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="title">Skills & highlights</h2>
+      <p class="muted" style="margin-top:8px">A snapshot of what I work with and enjoy.</p>
+      <div class="grid grid-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Languages & Frameworks</h3>
+          <p>C#, .NET, JavaScript, HTML, CSS, SQL</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">LINQ</span>
+            <span class="chip">ASP.NET Core</span>
+            <span class="chip">EF Core</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Concepts</h3>
+          <p>OOP, RESTful services, MVC, Git workflows</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">SOLID</span>
+            <span class="chip">Unit Testing</span>
+            <span class="chip">Design Patterns</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Soft Skills</h3>
+          <p>Reliable teammate with strong communication, curiosity, and initiative.</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">Leadership</span>
+            <span class="chip">Ownership</span>
+            <span class="chip">Adaptability</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROJECTS ====== -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="title">Projects</h2>
+      <p class="muted" style="margin-top:8px">A few things I’ve built while learning.</p>
+      <div class="grid grid-3" style="margin-top:18px">
+        <article class="card">
+          <h3>Task Tracker API</h3>
+          <p class="muted">ASP.NET Core Web API with CRUD endpoints, JWT auth, and EF Core for persistence.</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">ASP.NET</span><span class="chip">EF Core</span><span class="chip">JWT</span>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px">
+            <a class="btn secondary" href="#" aria-disabled="true">Repo soon</a>
+            <a class="btn" href="#contact">Ask for demo</a>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Study Planner</h3>
+          <p class="muted">Responsive web app to plan weekly study goals, with localStorage and progress streaks.</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px">
+            <a class="btn secondary" href="#" aria-disabled="true">Live soon</a>
+            <button class="btn" data-demo="planner">Try mini-demo</button>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Portfolio v1</h3>
+          <p class="muted">This very page — built with semantic HTML, modern CSS, and a sprinkle of JS.</p>
+          <div class="skills" style="margin-top:10px">
+            <span class="chip">Accessibility</span><span class="chip">Responsive</span><span class="chip">No libs</span>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px">
+            <a class="btn secondary" href="#home">Top</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TIMELINE ====== -->
+  <section id="timeline" class="section">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2 class="title">Learning journey</h2>
+        <div class="timeline" style="margin-top:10px">
+          <div class="t-item">
+            <h3>2025 — Deepening .NET & Web</h3>
+            <p class="muted">Building APIs, practicing SQL/EF Core, and creating full-stack prototypes.</p>
+          </div>
+          <div class="t-item">
+            <h3>2024 — Foundations</h3>
+            <p class="muted">OOP, data structures, algorithms, Git, and the basics of clean architecture.</p>
+          </div>
+          <div class="t-item">
+            <h3>Next — Internship Ready</h3>
+            <p class="muted">Looking for an environment to grow with mentors and ship real features.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.1rem">Highlights</h3>
+        <ul style="margin-top:8px; display:grid; gap:10px">
+          <li class="glass" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.09)">
+            ✅ Built multiple mini projects with clean Git history.
+          </li>
+          <li class="glass" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.09)">
+            🚀 Comfortable with REST, JSON, and testing endpoints.
+          </li>
+          <li class="glass" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.09)">
+            🧠 Strong problem solving and eagerness to learn.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact" class="section">
+    <div class="container grid grid-2">
+      <div class="card">
+        <h2 class="title">Let’s connect</h2>
+        <p class="muted" style="margin-top:8px">Want to collaborate or just say hi? Send a message:</p>
+        <form action="mailto:example@mail.com" method="post" enctype="text/plain">
+          <label>
+            <span>Name</span>
+            <input name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" placeholder="Tell me about your idea..." required></textarea>
+          </label>
+          <div style="display:flex; gap:10px; flex-wrap: wrap; align-items:center">
+            <button class="btn" type="submit">Send</button>
+            <span class="note">Prefer email? Replace the address above with your own.</span>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.1rem">Quick info</h3>
+        <ul style="margin-top:8px; display:grid; gap:12px">
+          <li><strong>Name:</strong> Bozhidar</li>
+          <li><strong>Role:</strong> Software Engineering Student</li>
+          <li><strong>Location:</strong> EU/Sweden</li>
+          <li><strong>Availability:</strong> Open to internships/part-time</li>
+        </ul>
+        <div style="margin-top:16px">
+          <h4 style="margin-bottom:8px">Socials</h4>
+          <div class="socials">
+            <a class="icon-btn" href="#" aria-label="GitHub (add your link)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.87 1.26 1.87 1.26 1.08 1.85 2.83 1.31 3.52 1 .11-.79.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.9 0-1.3.47-2.36 1.25-3.2-.13-.31-.55-1.55.12-3.24 0 0 1.04-.33 3.4 1.22a11.8 11.8 0 0 1 6.2 0c2.35-1.55 3.39-1.22 3.39-1.22.67 1.69.25 2.93.12 3.24.78.84 1.25 1.9 1.25 3.2 0 4.59-2.8 5.6-5.48 5.9.43.38.82 1.12.82 2.26v3.35c0 .32.21.7.82.58A12 12 0 0 0 12 .5z"/>
+              </svg>
+            </a>
+            <a class="icon-btn" href="#" aria-label="LinkedIn (add your link)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zM8 8h3.8v2.2h.05c.53-1 1.82-2.2 3.75-2.2 4 0 4.7 2.6 4.7 6V24h-4v-7.1c0-1.7 0-3.8-2.3-3.8-2.3 0-2.7 1.8-2.7 3.7V24H8V8z"/>
+              </svg>
+            </a>
+            <a class="icon-btn" href="mailto:example@mail.com" aria-labe
