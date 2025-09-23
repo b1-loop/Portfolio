@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,163 +8,239 @@
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #111827;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #f3f4f6;
       line-height: 1.7;
     }
-    header {
-      text-align: center;
-      padding: 5rem 1rem;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-    }
-    .links {
-      margin-top: 1.5rem;
-    }
-    .links a {
-      text-decoration: none;
-      color: white;
-      background: #2563eb;
-      padding: 0.6rem 1.4rem;
-      border-radius: 6px;
-      margin: 0 0.5rem;
-      transition: background 0.3s;
-      font-weight: 500;
-    }
-    .links a:hover {
-      background: #1d4ed8;
-    }
-    .container {
-      max-width: 900px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-    }
-    h2 {
-      color: #3b82f6;
-      margin-top: 2.5rem;
-      font-size: 1.9rem;
-    }
-    h3 {
-      margin-top: 1rem;
-      color: #60a5fa;
-    }
-    ul {
-      padding-left: 20px;
-    }
     a {
-      color: #60a5fa;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    /* Kontakt sektion */
-    .contact {
-      text-align: center;
-      margin-top: 4rem;
-      padding: 3rem 1rem;
-      background: #1f2937;
-      border-radius: 12px;
-    }
-    .contact h2 {
-      margin-bottom: 1rem;
-    }
-    .contact p {
-      margin-bottom: 1.5rem;
-    }
-    .contact a {
       text-decoration: none;
-      background: #2563eb;
-      color: white;
+      color: inherit;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f172a;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      color: #f3f4f6;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #3b82f6;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 6rem 1rem 4rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #d1d5db;
+    }
+    .hero .buttons {
+      margin-top: 2rem;
+    }
+    .hero .buttons a {
+      display: inline-block;
       padding: 0.8rem 1.5rem;
       margin: 0.5rem;
       border-radius: 6px;
       font-weight: 500;
+      transition: all 0.3s;
+    }
+    .hero .buttons a:first-child {
+      background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+      color: white;
+    }
+    .hero .buttons a:first-child:hover {
+      opacity: 0.85;
+    }
+    .hero .buttons a:last-child {
+      border: 2px solid #3b82f6;
+      color: #3b82f6;
+    }
+    .hero .buttons a:last-child:hover {
+      background: #1e293b;
+    }
+
+    /* About */
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #3b82f6;
+    }
+    section p {
+      max-width: 700px;
+      margin: auto;
+      color: #d1d5db;
+    }
+    .skills {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .skills span {
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: #1f2937;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: left;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: #d1d5db;
+      font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      background: #2563eb;
+      color: white;
       transition: background 0.3s;
     }
     .contact a:hover {
       background: #1d4ed8;
     }
+
+    /* Footer */
     footer {
       text-align: center;
-      margin-top: 4rem;
       padding: 2rem 1rem;
-      font-size: 0.9rem;
       color: #9ca3af;
       border-top: 1px solid #1f2937;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Bozhidar Ivanov</h1>
-    <p>Junior Software Engineer • .NET • Systemutveckling</p>
-    <div class="links">
+    <div class="logo">Bozhidar Ivanov</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
       <a href="https://github.com/b1-loop?tab=repositories" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">LinkedIn</a>
-    </div>
+    </nav>
   </header>
 
-  <div class="container">
-    <h2>Om mig</h2>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>👋 Hi, I'm Bozhidar Ivanov</h1>
+    <p>Junior Software Engineer passionate about building modern, efficient and user-friendly applications.</p>
+    <div class="buttons">
+      <a href="#projects">View Projects</a>
+      <a href="#contact">Contact Me</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>👨‍💻 About Me</h2>
     <p>
-      Hej! Jag heter Bozhidar och är en driven utvecklare med fokus på .NET och systemutveckling.  
-      Min resa började med en stark nyfikenhet på teknik och problemlösning, och idag har jag byggt upp 
-      en bred kompetens inom både mjukvaruutveckling och praktiskt ingenjörsarbete.
+      I'm <strong>Bozhidar Ivanov</strong>, a 27-year-old Junior Software Engineer based in Gothenburg, Sweden.  
+      Passionate about .NET, systemutveckling and problem solving.  
+      With experience from <strong>Volvo Cars</strong> and my own entrepreneurial projects,  
+      I thrive on combining technical knowledge with creativity to deliver real-world solutions.  
     </p>
-    <p>
-      Jag har erfarenhet från industriell produktion, eget företagande inom bilvård, och en stark passion 
-      för att skapa digitala lösningar som verkligen gör skillnad. Med en kombination av tekniskt kunnande 
-      och entreprenörsanda strävar jag alltid efter att leverera resultat som både är funktionella och användarvänliga.
+    <p style="margin-top:1rem;">
+      Currently sharpening my skills in <strong>C#, .NET and system development</strong>, while constantly learning new tools and technologies.  
+      Always curious, always improving 🚀
     </p>
-    <p>
-      Mitt mål? Att utvecklas som systemutvecklare, arbeta med innovativa projekt och samtidigt bidra med 
-      värde till både team och företag.
-    </p>
+    <div class="skills">
+      <span>C#</span>
+      <span>.NET</span>
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>Git & GitHub</span>
+      <span>Databases</span>
+    </div>
+  </section>
 
-    <h2>Vad jag kan bidra med</h2>
-    <ul>
-      <li>Förstå användarnas behov och översätta dem till fungerande kod</li>
-      <li>Kombinera teknisk precision med kreativitet</li>
-      <li>Bidra till team med energi, engagemang och ansvarskänsla</li>
-      <li>Lära mig snabbt och alltid hålla mig uppdaterad med ny teknik</li>
-    </ul>
+  <!-- Projects -->
+  <section id="projects">
+    <h2>🚀 Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <h3>Portfolio Website</h3>
+        <p>My personal portfolio built with HTML, CSS, and hosted on GitHub Pages.</p>
+        <a href="https://github.com/b1-loop?tab=repositories" target="_blank">View on GitHub →</a>
+      </div>
+      <div class="card">
+        <h3>OOP Demonstrations</h3>
+        <p>A set of projects demonstrating OOP principles in C# (Encapsulation, Inheritance, Polymorphism, Abstraction).</p>
+        <a href="https://github.com/b1-loop?tab=repositories" target="_blank">View on GitHub →</a>
+      </div>
+      <div class="card">
+        <h3>Web Projects</h3>
+        <p>Smaller front-end and back-end experiments to practice building interactive, user-friendly applications.</p>
+        <a href="https://github.com/b1-loop?tab=repositories" target="_blank">View on GitHub →</a>
+      </div>
+    </div>
+  </section>
 
-    <h2>Kompetenser</h2>
-    <h3>Programmering & Utveckling</h3>
-    <p>C#, .NET, objektorienterad programmering, webbutveckling med HTML, CSS och JavaScript.</p>
-
-    <h3>Verktyg & Arbetsflöden</h3>
-    <p>Git, GitHub, versionshantering och agilt arbetssätt.</p>
-
-    <h3>Databaser & System</h3>
-    <p>Grundläggande databashantering, systemarkitektur och förståelse för skalbara lösningar.</p>
-
-    <h2>Projekt</h2>
-    <p>
-      Jag har arbetat med flera mindre projekt som demonstrerar min förståelse för OOP, 
-      versionshantering och webbutveckling. Ett urval av mina projekt finns på GitHub:  
-      <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se alla projekt här</a>.
-    </p>
-  </div>
-
-  <!-- Kontaktsektion -->
-  <div class="container contact" id="contact">
-    <h2>Kontakt</h2>
-    <p>Vill du samarbeta, diskutera idéer eller komma i kontakt med mig?</p>
-    <a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">Kontakta mig på LinkedIn</a>
-    <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se min kod på GitHub</a>
-  </div>
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>📬 Contact Me</h2>
+    <p>Want to collaborate or just say hi? Feel free to reach out!</p>
+    <a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/b1-loop?tab=repositories" target="_blank">GitHub</a>
+  </section>
 
   <footer>
     © 2025 Bozhidar Ivanov — Junior Software Engineer
   </footer>
 </body>
 </html>
+
 
