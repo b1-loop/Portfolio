@@ -1,74 +1,172 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="sv">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bozhidar Ivanov — Junior Software Engineer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hello! I'm Bozhidar, a 27-year-old Junior Software Engineer. This is my modern, responsive portfolio." />
-  <meta property="og:title" content="Bozhidar Ivanov — Junior Software Engineer" />
-  <meta property="og:description" content="Modern, responsive portfolio for Bozhidar." />
-  <meta name="theme-color" content="#0ea5e9" />
-  <meta name="color-scheme" content="dark light" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='1' x2='1' y2='0'><stop offset='0' stop-color='%230ea5e9'/><stop offset='1' stop-color='%23a78bfa'/></linearGradient></defs><rect width='100' height='100' rx='18' fill='url(%23g)'/><text x='50' y='62' font-family='Verdana' font-size='56' text-anchor='middle' fill='white'>B</text></svg>">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Bozhidar Ivanov",
-    "jobTitle": "Junior Software Engineer",
-    "url": "https://b1-loop.github.io/",
-    "sameAs": [
-      "https://github.com/b1-loop",
-      "https://www.linkedin.com/in/bozhidar-ivanov-48158637b/"
-    ]
-  }
-  </script>
-  <!-- CSS från tidigare version behålls -->
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    * { margin: 0; }
-    html, body { height: 100%; }
-    body { line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; padding: 0; }
-    header { position: sticky; top: 0; background: rgba(0,0,0,.4); backdrop-filter: blur(8px); z-index: 10; }
-    .nav { display:flex; justify-content:space-between; align-items:center; padding:14px 0; }
-    .brand { display:flex; align-items:center; gap:.7rem; font-weight:800; }
-    .brand .logo { width: 36px; height: 36px; border-radius: 10px; background: conic-gradient(from 220deg at 50% 50%, #0ea5e9, #a78bfa, #22d3ee); }
-    nav ul { display:flex; gap:1rem; align-items:center; }
-    nav a { padding:.5rem .9rem; border-radius:8px; font-weight:600; color:#a5b4fc; }
-    nav a:hover { background:rgba(255,255,255,.08); color:#fff; }
-    footer { padding:40px 0; text-align:center; color:#a5b4fc; font-size:.9rem; }
+    :root {
+      --primary: #2563eb;
+      --secondary: #0ea5e9;
+      --bg: #f9fafb;
+      --text: #1f2937;
+      --card-bg: white;
+    }
+    body.dark {
+      --bg: #111827;
+      --text: #f3f4f6;
+      --card-bg: #1f2937;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: white;
+      position: relative;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .links {
+      margin-top: 1.5rem;
+    }
+    .links a {
+      text-decoration: none;
+      color: white;
+      margin: 0 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid white;
+      transition: all 0.3s ease;
+    }
+    .links a:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .dark-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .dark-toggle:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      margin-top: 2rem;
+      color: var(--primary);
+    }
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      margin-top: 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s, background 0.3s, color 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <header class="glass" role="banner">
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo float" aria-hidden="true"></div>
-        <a href="#home" class="title" style="font-size:1.15rem">Bozhidar</a>
-        <span class="tag">Junior Software Engineer</span>
-      </div>
-      <nav aria-label="Primary">
-        <ul id="navList">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#timeline">Timeline</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="https://github.com/b1-loop" target="_blank">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">LinkedIn</a></li>
-        </ul>
-      </nav>
+  <header>
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <img src="https://via.placeholder.com/120" alt="Profilbild">
+    <h1>Bozhidar Ivanov</h1>
+    <p>Junior Software Engineer • Systemutveckling • .NET</p>
+    <div class="links">
+      <a href="https://github.com/b1-loop?tab=repositories" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">LinkedIn</a>
     </div>
   </header>
 
-  <!-- resten av sidan (hero, about, skills, projects, timeline, contact) förblir oförändrat -->
+  <div class="container">
+    <h2>Om mig</h2>
+    <p>
+      Jag är en passionerad utvecklare med fokus på .NET och systemutveckling. 
+      Jag brinner för att bygga moderna, robusta och användarvänliga applikationer. 
+      Min styrka är att kombinera tekniskt kunnande med en kreativ syn på problemlösning.
+    </p>
+
+    <h2>Kompetenser</h2>
+    <div class="grid">
+      <div class="card">C#, .NET och objektorienterad programmering</div>
+      <div class="card">Webbutveckling (HTML, CSS, JavaScript)</div>
+      <div class="card">Git och GitHub för versionshantering</div>
+      <div class="card">Systemutveckling och databaser</div>
+    </div>
+
+    <h2>Projekt</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Portfolio på GitHub</h3>
+        <p>Ett urval av mina projekt finns på GitHub.</p>
+        <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se projekt →</a>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <div class="container">© <span id="year"></span> Bozhidar Ivanov — Junior Software Engineer</div>
+    © 2025 Bozhidar Ivanov
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+      const btn = document.querySelector(".dark-toggle");
+      if (document.body.classList.contains("dark")) {
+        btn.textContent = "☀️ Light Mode";
+      } else {
+        btn.textContent = "🌙 Dark Mode";
+      }
+    }
+  </script>
 </body>
 </html>
