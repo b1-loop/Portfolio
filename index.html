@@ -8,9 +8,9 @@
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #111827; /* mörk bakgrund */
-      color: #f3f4f6; /* ljus text */
-      line-height: 1.6;
+      background: #111827;
+      color: #f3f4f6;
+      line-height: 1.7;
     }
     header {
       text-align: center;
@@ -42,14 +42,18 @@
       background: #1d4ed8;
     }
     .container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 3rem auto;
       padding: 0 1rem;
     }
     h2 {
       color: #3b82f6;
-      margin-top: 2rem;
-      font-size: 1.8rem;
+      margin-top: 2.5rem;
+      font-size: 1.9rem;
+    }
+    h3 {
+      margin-top: 1rem;
+      color: #60a5fa;
     }
     ul {
       padding-left: 20px;
@@ -59,6 +63,33 @@
     }
     a:hover {
       text-decoration: underline;
+    }
+    /* Kontakt sektion */
+    .contact {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 3rem 1rem;
+      background: #1f2937;
+      border-radius: 12px;
+    }
+    .contact h2 {
+      margin-bottom: 1rem;
+    }
+    .contact p {
+      margin-bottom: 1.5rem;
+    }
+    .contact a {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .contact a:hover {
+      background: #1d4ed8;
     }
     footer {
       text-align: center;
@@ -83,24 +114,52 @@
   <div class="container">
     <h2>Om mig</h2>
     <p>
-      Jag är en passionerad utvecklare med fokus på .NET och systemutveckling. 
-      Jag älskar att bygga moderna, robusta och användarvänliga applikationer, 
-      och brinner för att kombinera tekniskt kunnande med kreativ problemlösning.
+      Hej! Jag heter Bozhidar och är en driven utvecklare med fokus på .NET och systemutveckling.  
+      Min resa började med en stark nyfikenhet på teknik och problemlösning, och idag har jag byggt upp 
+      en bred kompetens inom både mjukvaruutveckling och praktiskt ingenjörsarbete.
+    </p>
+    <p>
+      Jag har erfarenhet från industriell produktion, eget företagande inom bilvård, och en stark passion 
+      för att skapa digitala lösningar som verkligen gör skillnad. Med en kombination av tekniskt kunnande 
+      och entreprenörsanda strävar jag alltid efter att leverera resultat som både är funktionella och användarvänliga.
+    </p>
+    <p>
+      Mitt mål? Att utvecklas som systemutvecklare, arbeta med innovativa projekt och samtidigt bidra med 
+      värde till både team och företag.
     </p>
 
-    <h2>Kompetenser</h2>
+    <h2>Vad jag kan bidra med</h2>
     <ul>
-      <li>C#, .NET och objektorienterad programmering</li>
-      <li>Webbutveckling (HTML, CSS, JavaScript)</li>
-      <li>Git och GitHub för versionshantering</li>
-      <li>Systemutveckling och databaser</li>
+      <li>Förstå användarnas behov och översätta dem till fungerande kod</li>
+      <li>Kombinera teknisk precision med kreativitet</li>
+      <li>Bidra till team med energi, engagemang och ansvarskänsla</li>
+      <li>Lära mig snabbt och alltid hålla mig uppdaterad med ny teknik</li>
     </ul>
+
+    <h2>Kompetenser</h2>
+    <h3>Programmering & Utveckling</h3>
+    <p>C#, .NET, objektorienterad programmering, webbutveckling med HTML, CSS och JavaScript.</p>
+
+    <h3>Verktyg & Arbetsflöden</h3>
+    <p>Git, GitHub, versionshantering och agilt arbetssätt.</p>
+
+    <h3>Databaser & System</h3>
+    <p>Grundläggande databashantering, systemarkitektur och förståelse för skalbara lösningar.</p>
 
     <h2>Projekt</h2>
     <p>
-      Ett urval av mina projekt finns tillgängliga på GitHub:  
-      <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se mina projekt här</a>
+      Jag har arbetat med flera mindre projekt som demonstrerar min förståelse för OOP, 
+      versionshantering och webbutveckling. Ett urval av mina projekt finns på GitHub:  
+      <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se alla projekt här</a>.
     </p>
+  </div>
+
+  <!-- Kontaktsektion -->
+  <div class="container contact" id="contact">
+    <h2>Kontakt</h2>
+    <p>Vill du samarbeta, diskutera idéer eller komma i kontakt med mig?</p>
+    <a href="https://www.linkedin.com/in/bozhidar-ivanov-48158637b/" target="_blank">Kontakta mig på LinkedIn</a>
+    <a href="https://github.com/b1-loop?tab=repositories" target="_blank">Se min kod på GitHub</a>
   </div>
 
   <footer>
@@ -108,3 +167,4 @@
   </footer>
 </body>
 </html>
+
