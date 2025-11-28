@@ -41,6 +41,18 @@
       line-height: 1.6;
     }
 
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+      z-index: 60;
+      transform-origin: left;
+    }
+
     /* Layout */
     .container {
       width: 100%;
@@ -243,7 +255,18 @@
       font-size: 1rem;
       color: var(--muted);
       max-width: 34rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-rotating {
+      font-size: 0.9rem;
+      color: var(--muted);
       margin-bottom: 1.5rem;
+    }
+
+    .hero-rotating span {
+      color: #e5e7eb;
+      font-weight: 500;
     }
 
     .hero-actions {
@@ -486,6 +509,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+        transform var(--transition-fast), background var(--transition-fast);
+    }
+
+    .skill-item:hover {
+      border-color: rgba(168, 85, 247, 0.7);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.98);
+      transform: translateY(-1px);
+    }
+
+    .skill-item.active {
+      border-color: var(--accent);
+      box-shadow: 0 14px 40px rgba(88, 28, 135, 0.85);
+      background: rgba(17, 24, 39, 1);
     }
 
     .skill-name {
@@ -497,7 +536,63 @@
       color: var(--muted);
     }
 
+    .skill-details {
+      margin-top: 1rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.85rem;
+    }
+
+    .skill-details-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .skill-details-text {
+      color: #e5e7eb;
+      font-size: 0.85rem;
+    }
+
     /* Projects */
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.8rem;
+    }
+
+    .filter-btn {
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      transition: background var(--transition-fast), color var(--transition-fast),
+        border-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(168, 85, 247, 0.7);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 12px 30px rgba(88, 28, 135, 0.85);
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -761,6 +856,8 @@
   </style>
 </head>
 <body>
+  <div id="scroll-progress"></div>
+
   <header>
     <div class="container nav">
       <div class="logo">BOZHIDAR <span>IVANOV</span></div>
@@ -810,6 +907,10 @@
             real production environments at Volvo Cars. I enjoy turning ideas into working software that
             actually helps people.
           </p>
+
+          <div class="hero-rotating">
+            Currently focused on: <span id="hero-rotating-text">clean C# code</span>
+          </div>
 
           <div class="hero-actions">
             <a href="#projects" class="btn-primary">View Projects</a>
@@ -910,29 +1011,55 @@
           <div class="reveal">
             <div class="section-label">Skills</div>
             <div class="skills-grid">
-              <div class="skill-item">
+              <div
+                class="skill-item active"
+                data-description="I use C# and .NET as my main stack for building console applications, handling business logic, and structuring code in a clean and maintainable way."
+              >
                 <span class="skill-name">C# / .NET</span>
                 <span class="skill-level">Main stack</span>
               </div>
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                data-description="I apply OOP principles like encapsulation, inheritance, abstraction and polymorphism to structure my projects and keep responsibilities clear."
+              >
                 <span class="skill-name">OOP &amp; Design</span>
                 <span class="skill-level">Encapsulation, inheritance, etc.</span>
               </div>
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                data-description="I use Git and GitHub in a real team setting: branches, pull requests, resolving merge conflicts and keeping a clean history."
+              >
                 <span class="skill-name">Git &amp; GitHub</span>
                 <span class="skill-level">Branches, PRs, conflicts</span>
               </div>
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                data-description="I build responsive layouts with HTML and CSS, focusing on clarity and a modern UI that supports my backend and console work."
+              >
                 <span class="skill-name">HTML / CSS</span>
                 <span class="skill-level">Responsive layouts</span>
               </div>
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                data-description="I enjoy working in teams, communicating clearly, and combining different strengths to deliver solid results, both at Volvo and in school projects."
+              >
                 <span class="skill-name">Teamwork</span>
                 <span class="skill-level">Agile, group projects</span>
               </div>
-              <div class="skill-item">
+              <div
+                class="skill-item"
+                data-description="When something breaks, I like digging into errors, reading stack traces and figuring out what's really going on under the surface."
+              >
                 <span class="skill-name">Problem solving</span>
                 <span class="skill-level">Debugging &amp; learning fast</span>
+              </div>
+            </div>
+
+            <div class="skill-details">
+              <div class="skill-details-label">Skill focus</div>
+              <div class="skill-details-text">
+                I use C# and .NET as my main stack for building console applications, handling business logic,
+                and structuring code in a clean and maintainable way.
               </div>
             </div>
           </div>
@@ -950,9 +1077,16 @@
           user-focused design. These are the kind of tools I like to build and improve.
         </p>
 
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="backend">Backend / .NET</button>
+          <button class="filter-btn" data-filter="console">Console apps</button>
+          <button class="filter-btn" data-filter="web">Web / Frontend</button>
+        </div>
+
         <div class="projects-grid">
           <!-- Project 1: Travel Journal -->
-          <article class="project-card reveal">
+          <article class="project-card reveal" data-type="backend console">
             <div class="project-pill">
               <span>🧳</span> Console Application
             </div>
@@ -983,7 +1117,7 @@
           </article>
 
           <!-- Project 2: Quest-style console app -->
-          <article class="project-card reveal">
+          <article class="project-card reveal" data-type="backend console">
             <div class="project-pill">
               <span>🧩</span> OOP &amp; Architecture
             </div>
@@ -1012,7 +1146,7 @@
           </article>
 
           <!-- Project 3: Portfolio website -->
-          <article class="project-card reveal">
+          <article class="project-card reveal" data-type="web">
             <div class="project-pill">
               <span>🌐</span> Portfolio Website
             </div>
@@ -1153,6 +1287,15 @@
   </footer>
 
   <script>
+    // Scroll progress bar
+    const scrollProgress = document.getElementById("scroll-progress");
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = progress + "%";
+    });
+
     // Smooth active link highlight
     const sections = document.querySelectorAll("section[id]");
     const navLinks = document.querySelectorAll(".nav-link");
@@ -1201,6 +1344,60 @@
       alert("Thank you! In the next step we can wire this form to a real email service.");
       e.target.reset();
     }
+
+    // Rotating hero text
+    const rotatingText = document.getElementById("hero-rotating-text");
+    const rotatingPhrases = [
+      "clean C# code",
+      "solid .NET backends",
+      "practical console tools",
+      "better team workflows",
+      "learning fullstack step by step"
+    ];
+    let rotatingIndex = 0;
+
+    function updateRotatingText() {
+      rotatingIndex = (rotatingIndex + 1) % rotatingPhrases.length;
+      rotatingText.textContent = rotatingPhrases[rotatingIndex];
+    }
+    setInterval(updateRotatingText, 2500);
+
+    // Interactive skills
+    const skillItems = document.querySelectorAll(".skill-item");
+    const skillDetailsText = document.querySelector(".skill-details-text");
+
+    skillItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        skillItems.forEach((i) => i.classList.remove("active"));
+        item.classList.add("active");
+        const desc = item.getAttribute("data-description") || "";
+        if (desc && skillDetailsText) {
+          skillDetailsText.textContent = desc;
+        }
+      });
+    });
+
+    // Project filters
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        projectCards.forEach((card) => {
+          const type = (card.getAttribute("data-type") || "").toLowerCase();
+          if (filter === "all" || type.includes(filter)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
