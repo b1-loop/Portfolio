@@ -743,7 +743,7 @@
       color: var(--muted);
     }
 
-    /* Contact – new version */
+    /* Contact – upgraded */
     .contact-section {
       padding: 4rem 0 5rem;
     }
@@ -1357,7 +1357,7 @@
               </a>
 
               <a
-                href="mailto:bozhidar.ivanov@student.nbi-handelsakademin.se?subject=Opportunity%20for%20LIA%20/%20Fullstack%20Role"
+                href="mailto:bojidarivanov98@gmail.com?subject=Opportunity%20for%20LIA%20/%20Fullstack%20Role"
                 class="btn btn-ghost-contact"
               >
                 📧 Send me an email
@@ -1377,7 +1377,11 @@
           </div>
 
           <div class="contact-right">
-            <form id="contact-form">
+            <form
+              id="contact-form"
+              action="https://formspree.io/f/xgvgyqzp"
+              method="POST"
+            >
               <div class="field-group">
                 <label for="name">Name</label>
                 <input id="name" name="name" type="text" placeholder="Your name" required />
@@ -1404,7 +1408,7 @@
               </button>
 
               <p class="form-helper">
-                This is a demo form — it shows a success message on submit. Later it can be wired to a real service.
+                This form sends directly to my inbox via Formspree.
               </p>
 
               <p id="form-status" class="form-status" aria-live="polite"></p>
@@ -1528,22 +1532,40 @@
       });
     });
 
-    // Fake contact submit with status text
+    // Contact form -> Formspree with Sending/Thanks
     const contactForm = document.getElementById("contact-form");
     const statusEl = document.getElementById("form-status");
 
     if (contactForm && statusEl) {
-      contactForm.addEventListener("submit", (e) => {
+      contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         statusEl.textContent = "Sending...";
         statusEl.className = "form-status";
 
-        setTimeout(() => {
-          statusEl.textContent = "Thanks! Your message has been sent (demo).";
-          statusEl.classList.add("success");
-          contactForm.reset();
-        }, 700);
+        const formData = new FormData(contactForm);
+
+        try {
+          const res = await fetch(contactForm.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+
+          if (res.ok) {
+            statusEl.textContent = "Thanks! Your message has been sent (demo).";
+            statusEl.classList.add("success");
+            contactForm.reset();
+          } else {
+            statusEl.textContent = "Something went wrong. Please try again or email me directly.";
+            statusEl.classList.add("error");
+          }
+        } catch (err) {
+          statusEl.textContent = "Network error. Please try again or email me directly.";
+          statusEl.classList.add("error");
+        }
       });
     }
   </script>
