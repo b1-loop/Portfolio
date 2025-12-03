@@ -743,87 +743,197 @@
       color: var(--muted);
     }
 
-    /* Contact */
+    /* Contact – new version */
+    .contact-section {
+      padding: 4rem 0 5rem;
+    }
+
     .contact-card {
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: var(--radius-xl);
-      padding: 1.3rem 1.2rem;
-      border: 1px solid rgba(148, 163, 184, 0.55);
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, #050816, #0b1020);
+      border-radius: 24px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      padding: 2.5rem clamp(2rem, 4vw, 3rem);
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 1.7rem;
+      gap: 3rem;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       align-items: center;
     }
 
-    @media (max-width: 800px) {
-      .contact-card {
-        grid-template-columns: 1fr;
-      }
+    .contact-left h2 {
+      font-size: clamp(1.8rem, 2.4vw, 2.2rem);
+      margin-bottom: 1rem;
     }
 
-    .contact-text p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
+    .contact-left p {
+      color: #d1d5db;
+      max-width: 34rem;
+      font-size: 0.95rem;
     }
 
-    .contact-meta {
-      font-size: 0.85rem;
-      color: var(--muted);
+    .contact-based {
+      margin-top: 2rem;
+      font-size: 0.95rem;
     }
 
-    .contact-meta span {
+    .contact-based .label {
       display: block;
+      color: #9ca3af;
       font-weight: 500;
-      color: var(--text);
     }
 
-    .contact-actions {
+    .contact-based .value {
+      display: block;
+      color: #e5e7eb;
+    }
+
+    .contact-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1rem;
+      gap: 1rem;
+      margin-top: 2rem;
     }
 
-    form.contact-form {
-      display: grid;
-      gap: 0.7rem;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
     }
 
-    .field {
+    .btn-primary-contact {
+      background: radial-gradient(circle at 10% 0, rgba(236, 72, 153, 0.3), transparent 55%),
+              linear-gradient(90deg, #8b5cf6, #ec4899);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+      color: #f9fafb;
+    }
+
+    .btn-primary-contact:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+    }
+
+    .btn-ghost-contact {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: #1f2937;
+      color: #e5e7eb;
+    }
+
+    .btn-ghost-contact:hover {
+      background: #111827;
+      border-color: #4b5563;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #a78bfa;
+      text-decoration: none;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    .contact-extra {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .contact-right {
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 20px;
+      padding: 1.8rem 1.7rem;
+      border: 1px solid #1f2937;
+    }
+
+    .field-group {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
-      font-size: 0.8rem;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
     }
 
-    .field label {
-      color: var(--muted);
-    }
-
-    .field input,
-    .field textarea {
-      border-radius: 12px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: rgba(15, 23, 42, 0.9);
-      padding: 0.55rem 0.7rem;
-      color: var(--text);
-      font-family: inherit;
+    .field-group label {
       font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .field-group input,
+    .field-group textarea {
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.9rem;
+      color: #f9fafb;
       outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      font-family: inherit;
       resize: vertical;
     }
 
-    .field input:focus,
-    .field textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5);
+    .field-group input:focus,
+    .field-group textarea:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4);
     }
 
-    .contact-hint {
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
+    .btn-gradient {
+      background: linear-gradient(90deg, #8b5cf6, #ec4899);
+      color: #f9fafb;
+      border: none;
+      box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(139, 92, 246, 0.55);
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .form-helper {
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .form-status {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      min-height: 1.1rem;
+    }
+
+    .form-status.success {
+      color: #4ade80;
+    }
+
+    .form-status.error {
+      color: #f97373;
+    }
+
+    @media (max-width: 900px) {
+      .contact-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .contact-right {
+        order: -1;
+      }
     }
 
     /* Footer */
@@ -871,22 +981,23 @@
         </ul>
       </nav>
       <div class="nav-cta">
-  <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
-    👨‍💻
-  </a>
-  <a
-    href="https://www.linkedin.com/feed/"
-    target="_blank"
-    rel="noreferrer"
-    class="icon-link"
-    aria-label="LinkedIn"
-  >
-    🔗
-  </a>
-  <button class="btn-small" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-    <span>Contact</span> →
-  </button>
-</div>
+        <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
+          👨‍💻
+        </a>
+        <a
+          href="https://www.linkedin.com/feed/"
+          target="_blank"
+          rel="noreferrer"
+          class="icon-link"
+          aria-label="LinkedIn"
+        >
+          🔗
+        </a>
+        <button class="btn-small" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <span>Contact</span> →
+        </button>
+      </div>
+    </div>
   </header>
 
   <main>
@@ -1212,7 +1323,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="contact-section">
       <div class="container">
         <div class="section-label">Contact</div>
         <h2 class="section-title">Let’s talk</h2>
@@ -1222,57 +1333,83 @@
         </p>
 
         <div class="contact-card reveal">
-          <div class="contact-text">
+          <div class="contact-left">
+            <h2>Let’s work together</h2>
             <p>
-              I like clear communication and honest collaboration. Feel free to reach out if you want to talk
-              about my projects, my background, or how I could contribute to your team.
+              I like clear communication and honest collaboration. Reach out if you
+              want to talk about projects, LIA opportunities or how I can contribute
+              to your team.
             </p>
 
-            <div class="contact-meta">
-              <span>Based in:</span>
-              Gothenburg, Sweden
+            <div class="contact-based">
+              <span class="label">Based in:</span>
+              <span class="value">Gothenburg, Sweden</span>
             </div>
 
-            <div class="contact-actions">
+            <div class="contact-buttons">
               <a
                 href="https://www.linkedin.com/feed/"
                 target="_blank"
                 rel="noreferrer"
-                class="btn-primary"
+                class="btn btn-primary-contact"
               >
-                Contact me on LinkedIn
+                👔 Contact me on LinkedIn
               </a>
 
-              <a href="mailto:bozhidar.ivanov@student.nbi-handelsakademin.se" class="btn-ghost">
-                Send me an email
+              <a
+                href="mailto:bozhidar.ivanov@student.nbi-handelsakademin.se?subject=Opportunity%20for%20LIA%20/%20Fullstack%20Role"
+                class="btn btn-ghost-contact"
+              >
+                📧 Send me an email
+              </a>
+            </div>
+
+            <div class="contact-extra">
+              <p>Prefer GitHub?</p>
+              <a
+                href="https://github.com/b1-loop"
+                target="_blank"
+                class="btn-link"
+              >
+                💻 Visit my GitHub profile
               </a>
             </div>
           </div>
 
-          <form class="contact-form" onsubmit="handleFakeSubmit(event)">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" type="text" placeholder="Your name" required />
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@company.com" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                rows="3"
-                placeholder="Tell me a bit about your opportunity or project..."
-                required
-              ></textarea>
-            </div>
-            <button type="submit" class="btn-primary">Send message</button>
-            <div class="contact-hint">
-              This is a simple demo form — it can later be connected to a real service
-              (Formspree, Netlify Forms, or a custom backend).
-            </div>
-          </form>
+          <div class="contact-right">
+            <form id="contact-form">
+              <div class="field-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+
+              <div class="field-group">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+              </div>
+
+              <div class="field-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Tell me a bit about your opportunity or project..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-gradient full-width">
+                Send message
+              </button>
+
+              <p class="form-helper">
+                This is a demo form — it shows a success message on submit. Later it can be wired to a real service.
+              </p>
+
+              <p id="form-status" class="form-status" aria-live="polite"></p>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -1337,13 +1474,6 @@
 
     reveals.forEach((el) => observer.observe(el));
 
-    // Fake contact submit
-    function handleFakeSubmit(e) {
-      e.preventDefault();
-      alert("Thank you! In the next step we can wire this form to a real email service.");
-      e.target.reset();
-    }
-
     // Rotating hero text
     const rotatingText = document.getElementById("hero-rotating-text");
     const rotatingPhrases = [
@@ -1397,9 +1527,29 @@
         });
       });
     });
+
+    // Fake contact submit with status text
+    const contactForm = document.getElementById("contact-form");
+    const statusEl = document.getElementById("form-status");
+
+    if (contactForm && statusEl) {
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        statusEl.textContent = "Sending...";
+        statusEl.className = "form-status";
+
+        setTimeout(() => {
+          statusEl.textContent = "Thanks! Your message has been sent (demo).";
+          statusEl.classList.add("success");
+          contactForm.reset();
+        }, 700);
+      });
+    }
   </script>
 </body>
 </html>
+
 
 
 
