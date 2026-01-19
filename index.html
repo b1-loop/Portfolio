@@ -534,6 +534,7 @@
     .skill-level {
       font-size: 0.75rem;
       color: var(--muted);
+      text-align: right;
     }
 
     .skill-details {
@@ -1013,7 +1014,7 @@
             Hi, I’m <span>Bozhidar</span> — a fullstack developer who builds practical, real-world tools.
           </h1>
           <p class="hero-subtitle">
-            Fullstack developer with a strong C#/.NET background, growing frontend skills, and experience from
+            Fullstack developer with a strong C#/.NET background, growing web skills, and experience from
             real production environments at Volvo Cars. I enjoy turning ideas into working software that
             actually helps people.
           </p>
@@ -1030,11 +1031,11 @@
           <div class="hero-meta">
             <div class="hero-meta-item">
               <span>Backend &amp; Fullstack</span>
-              C#, .NET, OOP
+              C#, .NET, SQL, EF
             </div>
             <div class="hero-meta-item">
-              <span>Real-world mindset</span>
-              Volvo production experience
+              <span>Modern web</span>
+              HTML, CSS, JS, React, Blazor
             </div>
             <div class="hero-meta-item">
               <span>LIA &amp; junior roles</span>
@@ -1060,19 +1061,23 @@
                   <span>Console apps, JSON, clean structure</span>
                 </div>
                 <div class="hero-stat">
-                  <strong>Frontend basics</strong>
-                  <span>HTML, CSS, responsive layouts</span>
+                  <strong>Databases</strong>
+                  <span>SQL, Entity Framework, relations</span>
                 </div>
                 <div class="hero-stat">
-                  <strong>Team workflow</strong>
-                  <span>Git, branches, PRs, conflicts</span>
+                  <strong>Web development</strong>
+                  <span>HTML/CSS/JS, React, Blazor basics</span>
                 </div>
               </div>
 
               <div class="skill-chips">
                 <div class="skill-chip">C# / .NET</div>
                 <div class="skill-chip">OOP design</div>
-                <div class="skill-chip">Spectre.Console</div>
+                <div class="skill-chip">SQL</div>
+                <div class="skill-chip">Entity Framework</div>
+                <div class="skill-chip">Blazor</div>
+                <div class="skill-chip">JavaScript</div>
+                <div class="skill-chip">React</div>
                 <div class="skill-chip">Git &amp; GitHub</div>
                 <div class="skill-chip">HTML / CSS</div>
                 <div class="skill-chip">Problem solving</div>
@@ -1102,18 +1107,28 @@
           <div class="about-text reveal">
             <p>
               I’m a 27-year-old fullstack developer in training based in Gothenburg, Sweden. I’m currently sharpening my
-              skills in C#, .NET, and software architecture while working on practical projects both in school and on my own.
+              skills in C#, .NET, SQL, and modern web development while working on practical projects both in school and on my own.
             </p>
             <p>
               My background in production and logistics has given me a strong sense of structure, communication, and
-              problem-solving under pressure. I like to understand how systems work end-to-end, not only the code.
+              problem-solving under pressure. I like to understand how systems work end-to-end — not only the code,
+              but also the data flow and user experience.
+            </p>
+            <p>
+              I have solid knowledge of SQL and database design, and I use Entity Framework for smooth and efficient database
+              integration in my applications. I’m also gaining hands-on insight into Blazor for building dynamic, interactive user interfaces.
+            </p>
+            <p>
+              In addition, I work with core front-end technologies such as HTML, CSS, JavaScript, and React, and I explore modern UI and
+              design libraries to create clean, responsive, user-friendly interfaces.
             </p>
             <div class="about-highlight">
               I’m especially interested in:
               <ul style="margin-top: 0.3rem; padding-left: 1.1rem;">
-                <li>Object-oriented design and clean code</li>
+                <li>Object-oriented design and clean, maintainable code</li>
+                <li>Building data-driven applications with SQL and Entity Framework</li>
+                <li>Modern web UI with HTML/CSS/JavaScript, React and Blazor</li>
                 <li>Console and backend tools that make people’s work easier</li>
-                <li>Taking the next step into fullstack applications</li>
               </ul>
             </div>
           </div>
@@ -1123,53 +1138,89 @@
             <div class="skills-grid">
               <div
                 class="skill-item active"
-                data-description="I use C# and .NET as my main stack for building console applications, handling business logic, and structuring code in a clean and maintainable way."
+                data-description="I use C# and .NET as my main stack for building console applications, APIs, handling business logic, and structuring code in a clean and maintainable way."
               >
                 <span class="skill-name">C# / .NET</span>
                 <span class="skill-level">Main stack</span>
               </div>
+
+              <div
+                class="skill-item"
+                data-description="I have strong fundamentals in SQL: tables, relationships, constraints, queries, and I enjoy designing data models that support the application."
+              >
+                <span class="skill-name">SQL / Databases</span>
+                <span class="skill-level">Queries, relations</span>
+              </div>
+
+              <div
+                class="skill-item"
+                data-description="I use Entity Framework for smooth database integration: DbContext, migrations, relationships, and CRUD in a structured way."
+              >
+                <span class="skill-name">Entity Framework</span>
+                <span class="skill-level">Migrations, CRUD</span>
+              </div>
+
+              <div
+                class="skill-item"
+                data-description="I’m gaining hands-on insight into Blazor for building dynamic .NET-based web UIs and connecting frontend to backend logic."
+              >
+                <span class="skill-name">Blazor</span>
+                <span class="skill-level">Getting started</span>
+              </div>
+
+              <div
+                class="skill-item"
+                data-description="I build responsive layouts with HTML and CSS, focusing on clarity and a modern UI that supports my backend work."
+              >
+                <span class="skill-name">HTML / CSS</span>
+                <span class="skill-level">Responsive layouts</span>
+              </div>
+
+              <div
+                class="skill-item"
+                data-description="I use JavaScript for interactivity and I’m exploring React for component-based UIs and modern frontend workflows."
+              >
+                <span class="skill-name">JavaScript / React</span>
+                <span class="skill-level">Interactivity</span>
+              </div>
+
               <div
                 class="skill-item"
                 data-description="I apply OOP principles like encapsulation, inheritance, abstraction and polymorphism to structure my projects and keep responsibilities clear."
               >
                 <span class="skill-name">OOP &amp; Design</span>
-                <span class="skill-level">Encapsulation, inheritance, etc.</span>
+                <span class="skill-level">Encapsulation, etc.</span>
               </div>
+
               <div
                 class="skill-item"
                 data-description="I use Git and GitHub in a real team setting: branches, pull requests, resolving merge conflicts and keeping a clean history."
               >
                 <span class="skill-name">Git &amp; GitHub</span>
-                <span class="skill-level">Branches, PRs, conflicts</span>
+                <span class="skill-level">Branches, PRs</span>
               </div>
-              <div
-                class="skill-item"
-                data-description="I build responsive layouts with HTML and CSS, focusing on clarity and a modern UI that supports my backend and console work."
-              >
-                <span class="skill-name">HTML / CSS</span>
-                <span class="skill-level">Responsive layouts</span>
-              </div>
+
               <div
                 class="skill-item"
                 data-description="I enjoy working in teams, communicating clearly, and combining different strengths to deliver solid results, both at Volvo and in school projects."
               >
                 <span class="skill-name">Teamwork</span>
-                <span class="skill-level">Agile, group projects</span>
+                <span class="skill-level">Agile, groups</span>
               </div>
+
               <div
                 class="skill-item"
                 data-description="When something breaks, I like digging into errors, reading stack traces and figuring out what's really going on under the surface."
               >
                 <span class="skill-name">Problem solving</span>
-                <span class="skill-level">Debugging &amp; learning fast</span>
+                <span class="skill-level">Debugging</span>
               </div>
             </div>
 
             <div class="skill-details">
               <div class="skill-details-label">Skill focus</div>
               <div class="skill-details-text">
-                When something breaks, I like digging into errors, reading stack traces and figuring out what's really
-                going on under the surface.
+                I use C# and .NET as my main stack for building console applications, APIs, handling business logic, and structuring code in a clean and maintainable way.
               </div>
             </div>
           </div>
@@ -1314,7 +1365,7 @@
             <div class="timeline-role">.NET System Development Studies</div>
             <div class="timeline-meta">NBI / Handelsakademin · Sweden</div>
             <div class="timeline-desc">
-              Focus on C#, .NET, OOP, Git, and building real applications in groups. I treat school projects as
+              Focus on C#, .NET, OOP, Git, SQL and building real applications in groups. I treat school projects as
               “mini production” to learn how teams really work and prepare for fullstack roles and LIA.
             </div>
           </div>
