@@ -221,7 +221,7 @@
         box-shadow: 0 14px 40px rgba(88, 28, 135, 0.6);
     }
     
-    /* 3. Animated Icon in Button */
+    /* Animated Icon in Button */
     .btn-download span {
         display: inline-block;
         transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -593,12 +593,11 @@
       margin-bottom: 0.35rem;
     }
 
-    /* 2. Gradient Section Headers */
+    /* Gradient Section Headers */
     .section-title {
       font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
-      /* Gradient text */
       background: linear-gradient(90deg, #a855f7, #ec4899);
       -webkit-background-clip: text;
       color: transparent;
@@ -671,6 +670,10 @@
         position: relative;
         transition: transform 0.3s ease, border-color 0.3s ease;
         cursor: pointer;
+        /* For spotlight */
+        --mouse-x: 50%;
+        --mouse-y: 50%;
+        z-index: 1;
     }
     
     .github-card:hover {
@@ -686,6 +689,7 @@
         margin-bottom: 0.8rem;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        position: relative; z-index: 2;
     }
 
     .github-title {
@@ -715,6 +719,7 @@
         scrollbar-color: var(--muted) transparent;
         padding-bottom: 0.5rem;
         transition: filter 0.3s ease;
+        position: relative; z-index: 2;
     }
     
     .github-chart-wrapper::-webkit-scrollbar {
@@ -838,7 +843,7 @@
       font-size: 0.85rem;
     }
 
-    /* Projects - UPGRADED WITH SUPER POPUP */
+    /* Projects - UPGRADED WITH SUPER POPUP & SPOTLIGHT */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
@@ -891,7 +896,7 @@
       }
     }
 
-    /* Animated Project Card - SUPER POPUP */
+    /* Animated Project Card - SUPER POPUP & SPOTLIGHT */
     .project-card {
       background: var(--card);
       border-radius: var(--radius-xl);
@@ -902,16 +907,19 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy spring effect */
       min-height: 320px;
       z-index: 1;
+      /* For spotlight */
+      --mouse-x: 50%;
+      --mouse-y: 50%;
     }
 
     /* Hover State - 3D Lift & Glow */
     .project-card:hover {
-      transform: translateY(-12px) scale(1.03);
-      box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3);
-      border-color: var(--accent);
+      transform: translateY(-12px) scale(1.03); /* Higher lift, slight zoom */
+      box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3); /* Strong purple shadow */
+      border-color: var(--accent); /* Full accent border */
       z-index: 10;
     }
 
@@ -931,6 +939,26 @@
     .project-card:hover::after {
         left: 100%;
         transition: 0.7s;
+    }
+
+    /* SPOTLIGHT EFFECT pseudo-element */
+    .project-card::before, .github-card::before, .testimonial-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        600px circle at var(--mouse-x) var(--mouse-y),
+        rgba(139, 92, 246, 0.15),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .project-card:hover::before, .github-card:hover::before, .testimonial-card:hover::before {
+      opacity: 1;
     }
 
     /* Internal Element Animations on Hover */
@@ -957,6 +985,7 @@
         flex-grow: 1;
         display: flex;
         flex-direction: column;
+        position: relative; z-index: 2;
     }
 
     .project-pill {
@@ -1039,7 +1068,7 @@
         transform: translate(2px, -2px);
     }
     
-    /* Testimonials Section */
+    /* Testimonials Section - WITH SPOTLIGHT */
     .testimonial-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1053,6 +1082,11 @@
         padding: 1.5rem;
         border-radius: 16px;
         transition: transform 0.3s ease;
+        /* For spotlight */
+        --mouse-x: 50%;
+        --mouse-y: 50%;
+        position: relative;
+        z-index: 1;
     }
     
     .testimonial-card:hover {
@@ -1065,6 +1099,7 @@
         color: rgba(139, 92, 246, 0.5);
         margin-bottom: 0.8rem;
         font-family: serif;
+        position: relative; z-index: 2;
     }
     
     .testimonial-text {
@@ -1072,17 +1107,20 @@
         color: #e5e7eb;
         margin-bottom: 1rem;
         font-style: italic;
+        position: relative; z-index: 2;
     }
     
     .testimonial-author strong {
         display: block;
         color: #fff;
         font-size: 0.9rem;
+        position: relative; z-index: 2;
     }
     
     .testimonial-author span {
         font-size: 0.8rem;
         color: var(--muted);
+        position: relative; z-index: 2;
     }
 
     /* Experience */
@@ -2128,6 +2166,20 @@
         // Scrolls to the far right immediately
         ghChart.scrollLeft = ghChart.scrollWidth;
     }
+    
+    // Spotlight Effect Logic
+    const spotlightCards = document.querySelectorAll('.project-card, .github-card, .testimonial-card');
+
+    spotlightCards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
 
     // Contact form
     const contactForm = document.getElementById("contact-form");
