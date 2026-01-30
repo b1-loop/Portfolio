@@ -568,29 +568,68 @@
         border: 1px solid rgba(148, 163, 184, 0.2);
     }
     
-    /* GitHub Chart Styles */
-    .github-graph-section {
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 1px solid rgba(148, 163, 184, 0.2);
+    /* GitHub Card Styling - NEW */
+    .github-card {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.6); /* Slightly transparent dark */
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
     }
-    
-    .github-chart-container {
-        margin-top: 0.8rem;
-        overflow-x: auto;
+
+    .github-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
         padding-bottom: 0.5rem;
-        border-radius: 8px;
-        /* Slight background to make chart pop */
-        background: rgba(15, 23, 42, 0.3);
-        padding: 10px;
-        border: 1px solid rgba(148, 163, 184, 0.1);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .github-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #e5e7eb;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .github-link {
+        font-size: 0.75rem;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
     }
     
-    .github-chart-container img {
+    .github-link:hover {
+        text-decoration: underline;
+    }
+
+    .github-chart-wrapper {
+        overflow-x: auto; /* Allows scroll on mobile */
+        white-space: nowrap;
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: var(--muted) transparent;
+    }
+    
+    .github-chart-wrapper::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .github-chart-wrapper::-webkit-scrollbar-thumb {
+        background-color: var(--muted);
+        border-radius: 4px;
+    }
+
+    .github-chart-wrapper img {
         width: 100%;
-        min-width: 650px; /* Ensures it doesn't get too squished on mobile */
+        min-width: 600px; /* Ensures chart is readable even on phone (scrolls) */
         height: auto;
         display: block;
+        opacity: 0.9;
     }
 
     .skills-grid {
@@ -1296,17 +1335,6 @@
                 <div class="lang-item">🇬🇧 English (Fluent)</div>
                 <div class="lang-item">🇧🇬 Bulgarian (Native)</div>
             </div>
-            
-            <div class="github-graph-section">
-               <h3 class="section-title" style="font-size: 1rem; margin-bottom: 0.5rem; color: #e5e7eb;">Coding Activity</h3>
-               <div class="github-chart-container">
-                  <img src="https://ghchart.rshah.org/8b5cf6/b1-loop" alt="Bozhidar's GitHub Contribution Chart" />
-               </div>
-               <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem;">
-                  500+ contributions in the last year. Always coding.
-               </p>
-            </div>
-            
           </div>
 
           <div class="reveal">
@@ -1336,6 +1364,19 @@
                 Expertise in C#, .NET Core, Minimal APIs, and scalable architecture pattern like CQRS.
               </div>
             </div>
+
+            <div class="github-card">
+                <div class="github-header">
+                    <div class="github-title">
+                        <i class="devicon-github-original"></i> Coding Activity
+                    </div>
+                    <a href="https://github.com/b1-loop" target="_blank" class="github-link">View Profile →</a>
+                </div>
+                <div class="github-chart-wrapper">
+                    <img src="https://ghchart.rshah.org/8b5cf6/b1-loop" alt="Bozhidar's GitHub Chart" />
+                </div>
+            </div>
+
           </div>
         </div>
       </div>
