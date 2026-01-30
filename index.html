@@ -613,6 +613,7 @@
         white-space: nowrap;
         scrollbar-width: thin; /* Firefox */
         scrollbar-color: var(--muted) transparent;
+        padding-bottom: 0.5rem;
     }
     
     .github-chart-wrapper::-webkit-scrollbar {
@@ -630,6 +631,12 @@
         height: auto;
         display: block;
         opacity: 0.9;
+    }
+    
+    .badge-container {
+        margin-top: 0.8rem;
+        display: flex;
+        align-items: center;
     }
 
     .skills-grid {
@@ -1372,8 +1379,13 @@
                     </div>
                     <a href="https://github.com/b1-loop" target="_blank" class="github-link">View Profile →</a>
                 </div>
+                
                 <div class="github-chart-wrapper">
                     <img src="https://ghchart.rshah.org/8b5cf6/b1-loop" alt="Bozhidar's GitHub Chart" />
+                </div>
+                
+                <div class="badge-container">
+                    <img src="https://img.shields.io/badge/dynamic/json?color=8b5cf6&label=Contributions%20(Year)&query=%24.total.lastYear&url=https%3A%2F%2Fgithub-contributions-api.jogruber.de%2Fv4%2Fb1-loop&style=flat-square&logo=github" alt="GitHub Contributions" />
                 </div>
             </div>
 
@@ -1806,6 +1818,13 @@
         });
       });
     });
+
+    // Auto-scroll GitHub chart to the end (right) to hide empty past months
+    const ghChart = document.querySelector('.github-chart-wrapper');
+    if (ghChart) {
+        // Scrolls to the far right immediately
+        ghChart.scrollLeft = ghChart.scrollWidth;
+    }
 
     // Contact form
     const contactForm = document.getElementById("contact-form");
