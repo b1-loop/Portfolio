@@ -28,6 +28,7 @@
       --bg: #050816;
       --bg-alt: #0b1020;
       --accent: #8b5cf6;
+      --accent-bright: #a78bfa;
       --accent-soft: rgba(139, 92, 246, 0.18);
       --text: #f9fafb;
       --muted: #9ca3af;
@@ -350,6 +351,17 @@
       font-size: 0.9rem;
       color: var(--muted);
       margin-bottom: 1.5rem;
+    }
+
+    /* Typewriter Cursor */
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-start infinite;
+      color: var(--accent);
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     .hero-rotating span {
@@ -788,7 +800,7 @@
       font-size: 0.85rem;
     }
 
-    /* Projects - UPGRADED WITH ANIMATION (No Images) */
+    /* Projects - UPGRADED WITH SUPER POPUP */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
@@ -841,7 +853,7 @@
       }
     }
 
-    /* Animated Project Card */
+    /* Animated Project Card - SUPER POPUP */
     .project-card {
       background: var(--card);
       border-radius: var(--radius-xl);
@@ -852,15 +864,17 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy spring effect */
       min-height: 320px;
+      z-index: 1;
     }
 
-    /* Hover State - 3D Lift */
+    /* Hover State - 3D Lift & Glow */
     .project-card:hover {
-      transform: translateY(-7px) scale(1.01);
-      box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15); /* Subtle Purple Glow */
-      border-color: rgba(168, 85, 247, 0.5);
+      transform: translateY(-12px) scale(1.03); /* Higher lift, slight zoom */
+      box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3); /* Strong purple shadow */
+      border-color: var(--accent); /* Full accent border */
+      z-index: 10;
     }
 
     /* "Sheen" Effect */
@@ -871,7 +885,7 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
         transition: 0.5s;
         pointer-events: none;
     }
@@ -879,6 +893,19 @@
     .project-card:hover::after {
         left: 100%;
         transition: 0.7s;
+    }
+
+    /* Internal Element Animations on Hover */
+    .project-card:hover .project-title {
+        color: var(--accent-bright);
+        transition: color 0.3s;
+    }
+
+    .project-card:hover .project-pill {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        color: var(--text);
+        transition: all 0.3s;
     }
 
     .project-header-bg {
@@ -905,12 +932,14 @@
       color: var(--muted);
       margin-bottom: 0.7rem;
       align-self: flex-start;
+      transition: all 0.3s;
     }
 
     .project-title {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
       color: #fff;
+      transition: color 0.3s;
     }
 
     .project-description {
@@ -1519,7 +1548,7 @@
                     </div>
                     
                     <div style="font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem;">
-                      Constantly pushing code & shipping features.
+                      500+ contributions in the last year. Always coding.
                    </div>
                    
                    <div class="github-popup">
@@ -1957,21 +1986,55 @@
     );
     reveals.forEach((el) => observer.observe(el));
 
-    // Rotating hero text
+    // Typewriter Effect
     const rotatingText = document.getElementById("hero-rotating-text");
-    const rotatingPhrases = [
+    const phrases = [
       "clean C# code",
       "solid .NET backends",
       "scalable architecture",
       "modern React UIs",
       "solving real problems"
     ];
-    let rotatingIndex = 0;
-    function updateRotatingText() {
-      rotatingIndex = (rotatingIndex + 1) % rotatingPhrases.length;
-      rotatingText.textContent = rotatingPhrases[rotatingIndex];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
+
+    function typeWriter() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        rotatingText.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50; // Faster when deleting
+      } else {
+        rotatingText.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100; // Normal typing speed
+      }
+
+      // Add cursor style
+      if (!rotatingText.classList.contains("typing-cursor")) {
+        rotatingText.classList.add("typing-cursor");
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        // Finished typing phrase, pause before deleting
+        isDeleting = true;
+        typeSpeed = 2000; 
+      } else if (isDeleting && charIndex === 0) {
+        // Finished deleting, move to next phrase
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(typeWriter, typeSpeed);
     }
-    setInterval(updateRotatingText, 2500);
+
+    // Start the typing loop
+    document.addEventListener('DOMContentLoaded', typeWriter);
 
     // Interactive skills
     const skillItems = document.querySelectorAll(".skill-item");
