@@ -14,6 +14,8 @@
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
   <title>Bozhidar Ivanov – Fullstack Developer</title>
   
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -425,12 +427,20 @@
       background: rgba(15, 23, 42, 0.8);
     }
 
+    /* Pulse Animation for Status Dot */
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
     .hero-pill-dot {
       height: 7px;
       width: 7px;
       border-radius: 999px;
       background: #22c55e;
       box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+      animation: pulse-green 2s infinite;
     }
 
     .hero-stats {
@@ -466,6 +476,13 @@
       border-radius: 999px;
       background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .skill-chip i {
+        font-size: 0.9rem;
     }
 
     .hero-card-footer {
@@ -1185,17 +1202,28 @@
               </div>
 
               <div class="skill-chips">
-                <div class="skill-chip">C# / .NET 8</div>
-                <div class="skill-chip">CQRS & MediatR</div>
-                <div class="skill-chip">SQL Server</div>
-                <div class="skill-chip">Entity Framework</div>
-                <div class="skill-chip">Blazor & MudBlazor</div>
-                <div class="skill-chip">JavaScript / React</div>
-                <div class="skill-chip">Tailwind CSS</div>
-                <div class="skill-chip">Git & CI/CD</div>
-                <div class="skill-chip">Docker</div>
-                <div class="skill-chip">Azure</div>
+                <div class="skill-chip"><i class="devicon-csharp-plain"></i> C# / .NET</div>
+                <div class="skill-chip"><i class="devicon-microsoftsqlserver-plain"></i> SQL Server</div>
+                <div class="skill-chip"><i class="devicon-react-original"></i> React</div>
+                <div class="skill-chip"><i class="devicon-blazor-original"></i> Blazor</div>
+                <div class="skill-chip"><i class="devicon-docker-plain"></i> Docker</div>
+                <div class="skill-chip"><i class="devicon-azure-plain"></i> Azure</div>
+                <div class="skill-chip"><i class="devicon-git-plain"></i> Git</div>
               </div>
+              
+              <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(148, 163, 184, 0.2);">
+                  <div style="font-size: 0.75rem; text-transform: uppercase; color: #9ca3af; margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+                    GitHub Achievements
+                  </div>
+                  <div style="display: flex; gap: 0.8rem;">
+                    <div style="display: flex; align-items: center; gap: 0.4rem; background: rgba(30, 41, 59, 0.6); padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(148, 163, 184, 0.3); font-size: 0.8rem; color: #e5e7eb;">
+                      🦈 <span>Pull Shark x2</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem; background: rgba(30, 41, 59, 0.6); padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(148, 163, 184, 0.3); font-size: 0.8rem; color: #e5e7eb;">
+                      🤠 <span>Quickdraw</span>
+                    </div>
+                  </div>
+                </div>
 
               <div class="hero-card-footer">
                 <span>Looking for: Backend / Fullstack roles</span>
