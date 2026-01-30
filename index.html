@@ -49,6 +49,28 @@
       scroll-behavior: smooth;
     }
 
+    /* 1. Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 5px;
+      border: 2px solid var(--bg);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    /* Custom Selection Color */
+    ::selection {
+        background: var(--accent);
+        color: white;
+    }
+
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
@@ -197,6 +219,16 @@
     .btn-download:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 40px rgba(88, 28, 135, 0.6);
+    }
+    
+    /* 3. Animated Icon in Button */
+    .btn-download span {
+        display: inline-block;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .btn-download:hover span {
+        transform: translateY(-2px) scale(1.1);
     }
 
     /* Back to Top Button */
@@ -561,10 +593,16 @@
       margin-bottom: 0.35rem;
     }
 
+    /* 2. Gradient Section Headers */
     .section-title {
       font-size: 1.6rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
+      /* Gradient text */
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
     }
 
     .section-subtitle {
@@ -864,16 +902,16 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy spring effect */
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       min-height: 320px;
       z-index: 1;
     }
 
     /* Hover State - 3D Lift & Glow */
     .project-card:hover {
-      transform: translateY(-12px) scale(1.03); /* Higher lift, slight zoom */
-      box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3); /* Strong purple shadow */
-      border-color: var(--accent); /* Full accent border */
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 25px 50px rgba(139, 92, 246, 0.3);
+      border-color: var(--accent);
       z-index: 10;
     }
 
@@ -989,6 +1027,16 @@
 
     .project-link:hover {
         color: #fff;
+    }
+    
+    /* 4. Link Arrow Animation */
+    .project-link span {
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+    
+    .project-link:hover span {
+        transform: translate(2px, -2px);
     }
     
     /* Testimonials Section */
@@ -1548,7 +1596,7 @@
                     </div>
                     
                     <div style="font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem;">
-                      500+ contributions in the last year. Always coding.
+                      Constantly pushing code & shipping features.
                    </div>
                    
                    <div class="github-popup">
@@ -1915,7 +1963,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 Bozhidar Ivanov — Fullstack Developer</div>
+      <div>© <span id="year"></span> Bozhidar Ivanov — Fullstack Developer</div>
       <div style="display: flex; gap: 1rem;">
           <a href="https://github.com/b1-loop" target="_blank">GitHub</a>
           <a href="https://linkedin.com/in/bozhidar-ivanov-48158637b" target="_blank">LinkedIn</a>
@@ -1924,6 +1972,9 @@
   </footer>
 
   <script>
+    // Set dynamic year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
     // Scroll progress bar
     const scrollProgress = document.getElementById("scroll-progress");
     window.addEventListener("scroll", () => {
@@ -2110,6 +2161,16 @@
         }
       });
     }
+    
+    // Console Easter Egg
+    console.log(
+      "%c👋 Hi there! Looking for the source code?",
+      "color: #8b5cf6; font-size: 20px; font-weight: bold;"
+    );
+    console.log(
+      "%cNice to meet you! If you're checking my console, we should probably talk code. Feel free to email me at bojidarivanov98@gmail.com",
+      "color: #e5e7eb; font-size: 14px;"
+    );
   </script>
 </body>
 </html>
