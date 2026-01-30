@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bozhidar Ivanov – Fullstack .NET Developer Portfolio. C#, SQL, React and modern web development projects." />
   <title>Bozhidar Ivanov – Fullstack Developer</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
@@ -559,12 +560,12 @@
       font-size: 0.85rem;
     }
 
-    /* Projects */
+    /* Projects - UPGRADED DESIGN */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       font-size: 0.8rem;
     }
 
@@ -597,10 +598,10 @@
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.5rem;
+      gap: 1.7rem;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
       .projects-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -616,33 +617,47 @@
       background: var(--card);
       border-radius: var(--radius-xl);
       border: 1px solid var(--border);
-      padding: 1.1rem 1.15rem;
       box-shadow: 0 14px 35px rgba(15, 23, 42, 0.8);
-      transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out,
-        background 180ms ease-out;
+      transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out;
       position: relative;
       overflow: hidden;
-    }
-
-    .project-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(168, 85, 247, 0.22), transparent 50%);
-      opacity: 0;
-      transition: opacity 220ms ease-out;
-      pointer-events: none;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
-      transform: translateY(-4px) translateZ(0);
-      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
       border-color: rgba(168, 85, 247, 0.7);
-      background: #020617;
     }
 
-    .project-card:hover::before {
-      opacity: 1;
+    /* Image area for projects */
+    .project-image {
+        height: 160px;
+        width: 100%;
+        background-color: #111827;
+        background-size: cover;
+        background-position: center;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+    }
+    
+    .project-image-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 8, 22, 0.2);
+        transition: background 0.3s ease;
+    }
+    
+    .project-card:hover .project-image-overlay {
+        background: rgba(5, 8, 22, 0);
+    }
+
+    .project-content {
+        padding: 1.2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
 
     .project-pill {
@@ -655,32 +670,36 @@
       font-size: 0.7rem;
       color: var(--muted);
       margin-bottom: 0.7rem;
+      align-self: flex-start;
     }
 
     .project-title {
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: #fff;
     }
 
     .project-description {
       font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 0.7rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
       font-size: 0.75rem;
     }
 
     .project-tag {
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
     }
 
     .project-footer {
@@ -689,19 +708,23 @@
       align-items: center;
       font-size: 0.8rem;
       color: var(--muted);
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
     }
 
     .project-link {
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #a5b4fc;
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
+      font-weight: 500;
+      transition: color 0.2s;
     }
 
-    .project-link span {
-      font-size: 0.95rem;
+    .project-link:hover {
+        color: #fff;
     }
 
     /* Experience */
@@ -994,7 +1017,7 @@
         >
           🔗
         </a>
-        <button class="btn-small" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <button class="btn-small" id="contact-btn">
           <span>Contact</span> →
         </button>
       </div>
@@ -1002,7 +1025,6 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section id="hero">
       <div class="container hero-grid">
         <div class="hero-left reveal">
@@ -1093,7 +1115,6 @@
       </div>
     </section>
 
-    <!-- About & Skills -->
     <section id="about">
       <div class="container">
         <div class="section-label">About</div>
@@ -1228,118 +1249,183 @@
       </div>
     </section>
 
-    <!-- Projects -->
     <section id="projects">
       <div class="container">
         <div class="section-label">Projects</div>
         <h2 class="section-title">What I’ve been building</h2>
         <p class="section-subtitle">
-          A selection of projects that show how I work with C#, .NET, JSON data, Git workflows and
-          user-focused design. These are the kind of tools I like to build and improve.
+          A mix of backend tools, console applications and web projects that show how I work with C#, .NET, databases and modern frontend.
         </p>
 
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="backend">Backend / .NET</button>
-          <button class="filter-btn" data-filter="console">Console apps</button>
-          <button class="filter-btn" data-filter="web">Web / Frontend</button>
+          <button class="filter-btn" data-filter="web">Web &amp; Dashboard</button>
+          <button class="filter-btn" data-filter="console">Backend &amp; Console</button>
+          <button class="filter-btn" data-filter="game">Games &amp; Logic</button>
         </div>
 
         <div class="projects-grid">
-          <!-- Project 1: Travel Journal -->
-          <article class="project-card reveal" data-type="backend console">
-            <div class="project-pill">
-              <span>🧳</span> Console Application
-            </div>
-            <h3 class="project-title">Travel Journal</h3>
-            <p class="project-description">
-              A Spectre.Console powered terminal app where users can plan trips, manage budgets, track savings,
-              and log travel history — all stored in JSON files. Includes account system, progress bars and
-              a clean, structured codebase.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">C#</span>
-              <span class="project-tag">.NET</span>
-              <span class="project-tag">Spectre.Console</span>
-              <span class="project-tag">JSON</span>
-              <span class="project-tag">Team project</span>
-            </div>
-            <div class="project-footer">
-              <a
-                class="project-link"
-                href="https://github.com/b1-loop/Travel-Journal"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View on GitHub <span>↗</span>
-              </a>
-              <span>Team project · 2025</span>
-            </div>
-          </article>
+          
+            <article class="project-card reveal" data-type="web backend">
+                <div class="project-image" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>💰</span> Finance Tool
+                    </div>
+                    <h3 class="project-title">SalaryCoach</h3>
+                    <p class="project-description">
+                        A tool designed to help users track salaries, calculate taxes/benefits and project future earnings. Focus on reliable data handling and calculations.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">.NET</span>
+                        <span class="project-tag">Calculations</span>
+                        <span class="project-tag">Logic</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/b1-loop/SalaryCoach.git" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
 
-          <!-- Project 2: Quest-style console app -->
-          <article class="project-card reveal" data-type="backend console">
-            <div class="project-pill">
-              <span>🧩</span> OOP &amp; Architecture
-            </div>
-            <h3 class="project-title">Quest Guild Terminal</h3>
-            <p class="project-description">
-              A gamified quest manager in the terminal where users can register, log in, manage quests and
-              track progress. Focus on clean OOP, JSON persistence, separation of concerns and extensible design.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">C#</span>
-              <span class="project-tag">OOP</span>
-              <span class="project-tag">JSON</span>
-              <span class="project-tag">Console UI</span>
-            </div>
-            <div class="project-footer">
-              <a
-                class="project-link"
-                href="https://github.com/b1-loop/Quest-Guild-Terminal"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View on GitHub <span>↗</span>
-              </a>
-              <span>Solo project · Ongoing</span>
-            </div>
-          </article>
+            <article class="project-card reveal" data-type="web backend">
+                <div class="project-image" style="background: linear-gradient(135deg, #4c1d95, #8b5cf6);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>🎟️</span> Booking System
+                    </div>
+                    <h3 class="project-title">EventBooking</h3>
+                    <p class="project-description">
+                        A complete booking system for managing events, attendees, and tickets. Built to handle relational data and ensure smooth reservation flows.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">Entity Framework</span>
+                        <span class="project-tag">SQL</span>
+                        <span class="project-tag">CRUD</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/b1-loop/EventBooking.git" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
 
-          <!-- Project 3: Portfolio website -->
-          <article class="project-card reveal" data-type="web">
-            <div class="project-pill">
-              <span>🌐</span> Portfolio Website
-            </div>
-            <h3 class="project-title">Developer Portfolio</h3>
-            <p class="project-description">
-              This responsive portfolio website, built with semantic HTML, modern CSS and a bit of vanilla
-              JavaScript for animations and interactions. Designed to highlight my profile for LIA and junior
-              fullstack roles.
-            </p>
-            <div class="project-tags">
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">Responsive</span>
-            </div>
-            <div class="project-footer">
-              <a
-                class="project-link"
-                href="https://github.com/b1-loop/Portfolio"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View on GitHub <span>↗</span>
-              </a>
-              <span>Solo project · 2025</span>
-            </div>
-          </article>
+             <article class="project-card reveal" data-type="web">
+                <div class="project-image" style="background: linear-gradient(135deg, #111827, #374151);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>📊</span> API Integration
+                    </div>
+                    <h3 class="project-title">GitHub Dashboard</h3>
+                    <p class="project-description">
+                        A visual dashboard that interacts with the GitHub API to display user statistics, repository data, and commit history in a clean UI.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">JavaScript/React</span>
+                        <span class="project-tag">REST API</span>
+                        <span class="project-tag">JSON</span>
+                        <span class="project-tag">Frontend</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/b1-loop/github---dashboard.git" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card reveal" data-type="console backend">
+                <div class="project-image" style="background: linear-gradient(135deg, #059669, #34d399);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>🧳</span> Spectre.Console
+                    </div>
+                    <h3 class="project-title">Travel Journal</h3>
+                    <p class="project-description">
+                        A terminal app to plan trips, manage budgets, and log travel history. Stored in JSON. Features a rich console UI with progress bars.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">JSON</span>
+                        <span class="project-tag">Spectre.Console</span>
+                        <span class="project-tag">Team Project</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/b1-loop/Travel-Journal" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card reveal" data-type="console backend game">
+                <div class="project-image" style="background: linear-gradient(135deg, #b91c1c, #f87171);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>🧩</span> OOP Architecture
+                    </div>
+                    <h3 class="project-title">Quest Guild Terminal</h3>
+                    <p class="project-description">
+                        A gamified quest manager. Register, log in, and manage quests. Focus on strict OOP principles, separation of concerns and maintainable architecture.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">OOP</span>
+                        <span class="project-tag">Design Patterns</span>
+                        <span class="project-tag">Auth</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/b1-loop/Quest-Guild-Terminal" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card reveal" data-type="game console">
+                <div class="project-image" style="background: linear-gradient(135deg, #7c2d12, #ea580c);">
+                    <div class="project-image-overlay"></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-pill">
+                        <span>🕹️</span> Logic Game
+                    </div>
+                    <h3 class="project-title">Labyrinth Game</h3>
+                    <p class="project-description">
+                        A C# logic game where players navigate a maze. Demonstrates algorithmic thinking, pathfinding logic, and object-oriented game state management.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">C#</span>
+                        <span class="project-tag">Algorithms</span>
+                        <span class="project-tag">Logic</span>
+                        <span class="project-tag">Teamwork</span>
+                    </div>
+                    <div class="project-footer">
+                        <a class="project-link" href="https://github.com/Jocke-1994/LabyrinthGame.git" target="_blank" rel="noreferrer">
+                            View Code <span>↗</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
         </div>
       </div>
     </section>
 
-    <!-- Experience -->
     <section id="experience">
       <div class="container">
         <div class="section-label">Experience</div>
@@ -1373,7 +1459,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section id="contact" class="contact-section">
       <div class="container">
         <div class="section-label">Contact</div>
@@ -1511,6 +1596,11 @@
 
     window.addEventListener("scroll", onScroll);
 
+    // Scroll to contact from button
+    document.getElementById('contact-btn').addEventListener('click', function() {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+
     // Reveal on scroll
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
@@ -1523,7 +1613,7 @@
         });
       },
       {
-        threshold: 0.15,
+        threshold: 0.1,
       }
     );
 
@@ -1575,7 +1665,7 @@
         projectCards.forEach((card) => {
           const type = (card.getAttribute("data-type") || "").toLowerCase();
           if (filter === "all" || type.includes(filter)) {
-            card.style.display = "block";
+            card.style.display = "flex"; // Changed to flex for the card layout
           } else {
             card.style.display = "none";
           }
