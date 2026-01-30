@@ -168,14 +168,13 @@
       transform: translateY(-1px);
     }
 
-    /* CV Button Pulse Animation - NEW */
+    /* CV Button Pulse Animation */
     @keyframes pulse-purple {
       0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
       70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
       100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
     }
 
-    /* Download CV Button Style */
     .btn-download {
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
@@ -191,15 +190,47 @@
       gap: 0.4rem;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
-      
-      /* Apply the pulse animation */
       animation: pulse-purple 2s infinite;
     }
     
     .btn-download:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 40px rgba(88, 28, 135, 0.6);
-        /* Keep animation running on hover */
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--accent);
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: none;
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.5);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 99;
+        transform: translateY(20px);
+    }
+
+    #back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+        transform: translateY(-5px);
+        background: linear-gradient(135deg, #6366f1, #a855f7);
     }
 
     /* Hero section */
@@ -224,7 +255,6 @@
       align-items: center;
     }
 
-    /* Profile Picture Styles */
     .hero-profile-container {
         display: flex;
         justify-content: center;
@@ -715,7 +745,7 @@
       font-size: 0.85rem;
     }
 
-    /* Projects */
+    /* Projects - UPGRADED WITH ANIMATION (No Images) */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
@@ -768,48 +798,54 @@
       }
     }
 
+    /* Animated Project Card */
     .project-card {
       background: var(--card);
       border-radius: var(--radius-xl);
       border: 1px solid var(--border);
+      padding: 1.5rem;
       box-shadow: 0 14px 35px rgba(15, 23, 42, 0.8);
-      transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      min-height: 320px;
     }
 
+    /* Hover State - 3D Lift */
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
-      border-color: rgba(168, 85, 247, 0.7);
+      transform: translateY(-7px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15); /* Subtle Purple Glow */
+      border-color: rgba(168, 85, 247, 0.5);
     }
 
-    /* Image area for projects */
-    .project-image {
-        height: 160px;
-        width: 100%;
-        background-color: #111827;
-        background-size: cover;
-        background-position: center;
-        border-bottom: 1px solid var(--border);
-        position: relative;
-    }
-    
-    .project-image-overlay {
+    /* "Sheen" Effect */
+    .project-card::after {
+        content: "";
         position: absolute;
-        inset: 0;
-        background: rgba(5, 8, 22, 0.2);
-        transition: background 0.3s ease;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        transition: 0.5s;
+        pointer-events: none;
     }
-    
-    .project-card:hover .project-image-overlay {
-        background: rgba(5, 8, 22, 0);
+
+    .project-card:hover::after {
+        left: 100%;
+        transition: 0.7s;
+    }
+
+    .project-header-bg {
+        height: 50px;
+        margin: -1.5rem -1.5rem 1.2rem -1.5rem;
+        background: linear-gradient(135deg, #1f2937, #111827);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .project-content {
-        padding: 1.2rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -829,23 +865,24 @@
     }
 
     .project-title {
-      font-size: 1.1rem;
-      margin-bottom: 0.4rem;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
       color: #fff;
     }
 
     .project-description {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--muted);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       flex-grow: 1;
+      line-height: 1.6;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       font-size: 0.75rem;
     }
 
@@ -863,7 +900,7 @@
       align-items: center;
       font-size: 0.8rem;
       color: var(--muted);
-      padding-top: 0.8rem;
+      padding-top: 1rem;
       border-top: 1px solid rgba(148, 163, 184, 0.2);
     }
 
@@ -880,6 +917,52 @@
 
     .project-link:hover {
         color: #fff;
+    }
+    
+    /* Testimonials Section */
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .testimonial-card {
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        padding: 1.5rem;
+        border-radius: 16px;
+        transition: transform 0.3s ease;
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(139, 92, 246, 0.4);
+    }
+    
+    .quote-icon {
+        font-size: 1.5rem;
+        color: rgba(139, 92, 246, 0.5);
+        margin-bottom: 0.8rem;
+        font-family: serif;
+    }
+    
+    .testimonial-text {
+        font-size: 0.9rem;
+        color: #e5e7eb;
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+    
+    .testimonial-author strong {
+        display: block;
+        color: #fff;
+        font-size: 0.9rem;
+    }
+    
+    .testimonial-author span {
+        font-size: 0.8rem;
+        color: var(--muted);
     }
 
     /* Experience */
@@ -1166,6 +1249,8 @@
 </head>
 <body>
   <div id="scroll-progress"></div>
+  
+  <button id="back-to-top" title="Go to top">↑</button>
 
   <header>
     <div class="container nav">
@@ -1416,9 +1501,7 @@
         <div class="projects-grid">
           
             <article class="project-card reveal" data-type="web">
-                <div class="project-image" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>🤖</span> AI & Blazor
@@ -1442,9 +1525,7 @@
             </article>
 
             <article class="project-card reveal" data-type="console backend">
-                <div class="project-image" style="background: linear-gradient(135deg, #4c1d95, #8b5cf6);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>🎟️</span> Database First
@@ -1468,9 +1549,7 @@
             </article>
 
              <article class="project-card reveal" data-type="web">
-                <div class="project-image" style="background: linear-gradient(135deg, #111827, #374151);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>📊</span> API Integration
@@ -1494,9 +1573,7 @@
             </article>
 
             <article class="project-card reveal" data-type="console backend">
-                <div class="project-image" style="background: linear-gradient(135deg, #059669, #34d399);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>🧳</span> Scalable System
@@ -1520,9 +1597,7 @@
             </article>
 
              <article class="project-card reveal" data-type="console backend">
-                <div class="project-image" style="background: linear-gradient(135deg, #b91c1c, #f87171);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>🎯</span> Productivity
@@ -1545,9 +1620,7 @@
             </article>
             
              <article class="project-card reveal" data-type="game console">
-                <div class="project-image" style="background: linear-gradient(135deg, #7c2d12, #ea580c);">
-                    <div class="project-image-overlay"></div>
-                </div>
+                <div class="project-header-bg"></div>
                 <div class="project-content">
                     <div class="project-pill">
                         <span>🕹️</span> Logic Game
@@ -1627,6 +1700,51 @@
           </div>
         </div>
       </div>
+    </section>
+    
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-label">References</div>
+            <h2 class="section-title">What people say</h2>
+            <p class="section-subtitle">
+                Feedback from colleagues and managers I've worked with[cite: 110].
+            </p>
+            
+            <div class="testimonial-grid reveal">
+                <div class="testimonial-card">
+                    <div class="quote-icon">❝</div>
+                    <p class="testimonial-text">
+                        "Bozhidar has an exceptional problem-solving mindset and a disciplined approach to every challenge he faces." [cite: 116]
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Nemanja Milosavljevic</strong>
+                        <span>Owner & IT Consultant, InFiNet Code AB [cite: 111]</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote-icon">❝</div>
+                    <p class="testimonial-text">
+                        "His leadership at Volvo was outstanding. He knows how to coordinate operations and drive team performance." [cite: 117]
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Rajan Mahdavi</strong>
+                        <span>Project Manager, Volvo Group [cite: 114]</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="quote-icon">❝</div>
+                    <p class="testimonial-text">
+                        "A fast learner who writes clean, maintainable backend code. Highly committed to software engineering." [cite: 119]
+                    </p>
+                    <div class="testimonial-author">
+                        <strong>Arian Alikashani</strong>
+                        <span>Backend Developer, Norion Bank [cite: 112]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="contact-section">
@@ -1734,6 +1852,23 @@
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       scrollProgress.style.width = progress + "%";
+    });
+
+    // Back to top button logic
+    const backToTopBtn = document.getElementById("back-to-top");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add("show");
+        } else {
+            backToTopBtn.classList.remove("show");
+        }
+    });
+    
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     });
 
     // Smooth active link highlight
