@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <meta name="description" content="Bozhidar Ivanov – Fullstack .NET Developer Portfolio. C#, SQL, React and modern web development projects." />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://b1-loop.github.io/Portfolio/" />
+  <meta property="og:title" content="Bozhidar Ivanov – Fullstack .NET Developer" />
+  <meta property="og:description" content="Portfolio of Bozhidar Ivanov. C#, .NET, React and SQL developer based in Gothenburg looking for LIA/Junior roles." />
+  <meta property="og:image" content="https://b1-loop.github.io/Portfolio/profile.png" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+
   <title>Bozhidar Ivanov – Fullstack Developer</title>
+  
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -200,7 +211,7 @@
       align-items: center;
     }
 
-    /* Profile Picture Container */
+    /* 5. Improved Profile Picture Styles */
     .hero-profile-container {
         display: flex;
         justify-content: center;
@@ -215,6 +226,17 @@
         border: 3px solid var(--accent);
         box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
         background-color: var(--bg-alt);
+        
+        /* Grayscale effect in idle state */
+        filter: grayscale(30%);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .profile-img:hover {
+        /* Pop effect on hover */
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 0 45px rgba(139, 92, 246, 0.6);
+        filter: grayscale(0%);
     }
 
     @media (max-width: 800px) {
@@ -1030,6 +1052,18 @@
         </ul>
       </nav>
       <div class="nav-cta">
+        <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
+          👨‍💻
+        </a>
+        <a
+          href="https://www.linkedin.com/feed/"
+          target="_blank"
+          rel="noreferrer"
+          class="icon-link"
+          aria-label="LinkedIn"
+        >
+          🔗
+        </a>
         <a class="btn-download" href="cv.pdf" target="_blank">
           <span>📄</span> Download CV
         </a>
