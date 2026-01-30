@@ -155,7 +155,8 @@
       transform: translateY(-1px);
     }
 
-    .btn-small {
+    /* Download CV Button Style */
+    .btn-download {
       padding: 0.35rem 0.9rem;
       border-radius: 999px;
       border: none;
@@ -167,11 +168,14 @@
       box-shadow: 0 10px 30px rgba(88, 28, 135, 0.45);
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    .btn-small span {
-      font-size: 0.9rem;
+    
+    .btn-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(88, 28, 135, 0.6);
     }
 
     /* Hero section */
@@ -196,10 +200,31 @@
       align-items: center;
     }
 
+    /* Profile Picture Container */
+    .hero-profile-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .profile-img {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--accent);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+        background-color: var(--bg-alt);
+    }
+
     @media (max-width: 800px) {
       .hero-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+      }
+
+      .hero-right {
+        order: -1; 
       }
 
       header {
@@ -560,7 +585,7 @@
       font-size: 0.85rem;
     }
 
-    /* Projects - UPGRADED DESIGN */
+    /* Projects */
     .project-filters {
       display: flex;
       flex-wrap: wrap;
@@ -767,7 +792,7 @@
       color: var(--muted);
     }
 
-    /* Contact – upgraded */
+    /* Contact */
     .contact-section {
       padding: 4rem 0 5rem;
     }
@@ -1005,21 +1030,9 @@
         </ul>
       </nav>
       <div class="nav-cta">
-        <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
-          👨‍💻
+        <a class="btn-download" href="cv.pdf" target="_blank">
+          <span>📄</span> Download CV
         </a>
-        <a
-          href="https://www.linkedin.com/feed/"
-          target="_blank"
-          rel="noreferrer"
-          class="icon-link"
-          aria-label="LinkedIn"
-        >
-          🔗
-        </a>
-        <button class="btn-small" id="contact-btn">
-          <span>Contact</span> →
-        </button>
       </div>
     </div>
   </header>
@@ -1036,9 +1049,8 @@
             Hi, I’m <span>Bozhidar</span> — a fullstack developer who builds practical, real-world tools.
           </h1>
           <p class="hero-subtitle">
-            Fullstack developer with a strong C#/.NET background, growing web skills, and experience from
-            real production environments at Volvo Cars. I enjoy turning ideas into working software that
-            actually helps people.
+            Ambitious .NET Fullstack Developer with extensive experience from Volvo Cars and running my own service business. 
+            I combine technical education in C#, SQL, and React with a strong execution mindset and leadership skills.
           </p>
 
           <div class="hero-rotating">
@@ -1047,67 +1059,76 @@
 
           <div class="hero-actions">
             <a href="#projects" class="btn-primary">View Projects</a>
-            <a href="#about" class="btn-ghost">More about me</a>
+            <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact me</button>
           </div>
 
           <div class="hero-meta">
             <div class="hero-meta-item">
               <span>Backend &amp; Fullstack</span>
-              C#, .NET, SQL, EF
+              C#, .NET, Minimal API
             </div>
             <div class="hero-meta-item">
               <span>Modern web</span>
-              HTML, CSS, JS, React, Blazor
+              React, Tailwind, Blazor
             </div>
             <div class="hero-meta-item">
-              <span>LIA &amp; junior roles</span>
-              Open to opportunities
+              <span>Architecture</span>
+              Clean Architecture, CQRS
             </div>
           </div>
         </div>
 
         <div class="hero-right reveal">
+          
+          <div class="hero-profile-container">
+            <img 
+              src="profile.png" 
+              alt="Bozhidar Ivanov" 
+              class="profile-img"
+            />
+          </div>
+
           <div class="hero-card">
             <div class="hero-card-inner">
               <div class="hero-card-header">
                 <div class="hero-card-title">Currently</div>
                 <div class="hero-pill">
                   <span class="hero-pill-dot"></span>
-                  Actively learning &amp; building
+                  Open for LIA & Jobs
                 </div>
               </div>
 
               <div class="hero-stats">
                 <div class="hero-stat">
                   <strong>Backend / .NET</strong>
-                  <span>Console apps, JSON, clean structure</span>
+                  <span>SOLID, Layered Arch, Clean Code</span>
                 </div>
                 <div class="hero-stat">
                   <strong>Databases</strong>
-                  <span>SQL, Entity Framework, relations</span>
+                  <span>SQL Server, EF Core, Normalization</span>
                 </div>
                 <div class="hero-stat">
-                  <strong>Web development</strong>
-                  <span>HTML/CSS/JS, React, Blazor basics</span>
+                  <strong>Frontend & AI</strong>
+                  <span>React, Blazor, OpenAI API</span>
                 </div>
               </div>
 
               <div class="skill-chips">
-                <div class="skill-chip">C# / .NET</div>
-                <div class="skill-chip">OOP design</div>
-                <div class="skill-chip">SQL</div>
+                <div class="skill-chip">C# / .NET 8</div>
+                <div class="skill-chip">CQRS & MediatR</div>
+                <div class="skill-chip">SQL Server</div>
                 <div class="skill-chip">Entity Framework</div>
-                <div class="skill-chip">Blazor</div>
-                <div class="skill-chip">JavaScript</div>
-                <div class="skill-chip">React</div>
-                <div class="skill-chip">Git &amp; GitHub</div>
-                <div class="skill-chip">HTML / CSS</div>
-                <div class="skill-chip">Problem solving</div>
+                <div class="skill-chip">Blazor & MudBlazor</div>
+                <div class="skill-chip">JavaScript / React</div>
+                <div class="skill-chip">Tailwind CSS</div>
+                <div class="skill-chip">Git & CI/CD</div>
+                <div class="skill-chip">Docker</div>
+                <div class="skill-chip">Azure</div>
               </div>
 
               <div class="hero-card-footer">
-                <span>Looking for: LIA &amp; junior fullstack roles</span>
-                <span>⚡ Always improving</span>
+                <span>Looking for: Backend / Fullstack roles</span>
+                <span>⚡ Proven Leadership</span>
               </div>
             </div>
           </div>
@@ -1120,36 +1141,31 @@
         <div class="section-label">About</div>
         <h2 class="section-title">Who I am</h2>
         <p class="section-subtitle">
-          I combine hands-on experience from manufacturing at Volvo Cars with system development studies, focusing on
-          building reliable, maintainable software in C# and .NET on my way to fullstack development.
+            I’m a highly disciplined software engineer who combines leadership from industrial environments with modern .NET development.
         </p>
 
         <div class="about-grid">
           <div class="about-text reveal">
             <p>
-              I’m a 27-year-old fullstack developer in training based in Gothenburg, Sweden. I’m currently sharpening my
-              skills in C#, .NET, SQL, and modern web development while working on practical projects both in school and on my own.
+              I’m a 27-year-old developer based in Gothenburg with a unique background. Before transitioning to software engineering,
+              I worked as a Team Leader and Machine Operator at Volvo Cars, where I learned to solve problems under pressure 
+              and maintain high quality in automated manufacturing environments.
             </p>
             <p>
-              My background in production and logistics has given me a strong sense of structure, communication, and
-              problem-solving under pressure. I like to understand how systems work end-to-end — not only the code,
-              but also the data flow and user experience.
+              Simultaneously, I founded and scaled a profitable premium service business (HB Luxury Auto Detailing), which gave me 
+              strong business acumen and a customer-first mindset.
             </p>
             <p>
-              I have solid knowledge of SQL and database design, and I use Entity Framework for smooth and efficient database
-              integration in my applications. I’m also gaining hands-on insight into Blazor for building dynamic, interactive user interfaces.
-            </p>
-            <p>
-              In addition, I work with core front-end technologies such as HTML, CSS, JavaScript, and React, and I explore modern UI and
-              design libraries to create clean, responsive, user-friendly interfaces.
+              Now, I apply that same discipline to building software. I specialize in C# and .NET, building structured backends with 
+              Clean Architecture and SOLID principles. I also enjoy building modern UIs with React and Blazor.
             </p>
             <div class="about-highlight">
-              I’m especially interested in:
+              Key Strengths:
               <ul style="margin-top: 0.3rem; padding-left: 1.1rem;">
-                <li>Object-oriented design and clean, maintainable code</li>
-                <li>Building data-driven applications with SQL and Entity Framework</li>
-                <li>Modern web UI with HTML/CSS/JavaScript, React and Blazor</li>
-                <li>Console and backend tools that make people’s work easier</li>
+                <li>Strong problem-solving mindset and system thinking</li>
+                <li>Clean Code, Architecture & Validation (FluentValidation)</li>
+                <li>AI integration (OpenAI API, Prompt Engineering)</li>
+                <li>Proven leadership from high-responsibility roles</li>
               </ul>
             </div>
           </div>
@@ -1157,91 +1173,28 @@
           <div class="reveal">
             <div class="section-label">Skills</div>
             <div class="skills-grid">
-              <div
-                class="skill-item active"
-                data-description="I use C# and .NET as my main stack for building console applications, APIs, handling business logic, and structuring code in a clean and maintainable way."
-              >
+              <div class="skill-item active" data-description="Expertise in C#, .NET Core, Minimal APIs, and scalable architecture pattern like CQRS.">
                 <span class="skill-name">C# / .NET</span>
-                <span class="skill-level">Main stack</span>
+                <span class="skill-level">Advanced</span>
               </div>
-
-              <div
-                class="skill-item"
-                data-description="I have strong fundamentals in SQL: tables, relationships, constraints, queries, and I enjoy designing data models that support the application."
-              >
-                <span class="skill-name">SQL / Databases</span>
-                <span class="skill-level">Queries, relations</span>
+              <div class="skill-item" data-description="Experience with SQL Server, relational design, normalization, and Entity Framework Core.">
+                <span class="skill-name">SQL & Data</span>
+                <span class="skill-level">Advanced</span>
               </div>
-
-              <div
-                class="skill-item"
-                data-description="I use Entity Framework for smooth database integration: DbContext, migrations, relationships, and CRUD in a structured way."
-              >
-                <span class="skill-name">Entity Framework</span>
-                <span class="skill-level">Migrations, CRUD</span>
+              <div class="skill-item" data-description="Building modern web apps with React, Tailwind CSS, TanStack Query and Blazor.">
+                <span class="skill-name">Frontend</span>
+                <span class="skill-level">Intermediate</span>
               </div>
-
-              <div
-                class="skill-item"
-                data-description="I’m gaining hands-on insight into Blazor for building dynamic .NET-based web UIs and connecting frontend to backend logic."
-              >
-                <span class="skill-name">Blazor</span>
-                <span class="skill-level">Getting started</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="I build responsive layouts with HTML and CSS, focusing on clarity and a modern UI that supports my backend work."
-              >
-                <span class="skill-name">HTML / CSS</span>
-                <span class="skill-level">Responsive layouts</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="I use JavaScript for interactivity and I’m exploring React for component-based UIs and modern frontend workflows."
-              >
-                <span class="skill-name">JavaScript / React</span>
-                <span class="skill-level">Interactivity</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="I apply OOP principles like encapsulation, inheritance, abstraction and polymorphism to structure my projects and keep responsibilities clear."
-              >
-                <span class="skill-name">OOP &amp; Design</span>
-                <span class="skill-level">Encapsulation, etc.</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="I use Git and GitHub in a real team setting: branches, pull requests, resolving merge conflicts and keeping a clean history."
-              >
-                <span class="skill-name">Git &amp; GitHub</span>
-                <span class="skill-level">Branches, PRs</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="I enjoy working in teams, communicating clearly, and combining different strengths to deliver solid results, both at Volvo and in school projects."
-              >
-                <span class="skill-name">Teamwork</span>
-                <span class="skill-level">Agile, groups</span>
-              </div>
-
-              <div
-                class="skill-item"
-                data-description="When something breaks, I like digging into errors, reading stack traces and figuring out what's really going on under the surface."
-              >
-                <span class="skill-name">Problem solving</span>
-                <span class="skill-level">Debugging</span>
+              <div class="skill-item" data-description="Version control with Git, GitHub Flow, Pull Requests, and CI/CD pipelines (GitHub Actions).">
+                <span class="skill-name">DevOps</span>
+                <span class="skill-level">Tools</span>
               </div>
             </div>
 
             <div class="skill-details">
               <div class="skill-details-label">Skill focus</div>
               <div class="skill-details-text">
-                I use C# and .NET as my main stack for building console applications, APIs, handling business logic, and structuring code in a clean and maintainable way.
+                Expertise in C#, .NET Core, Minimal APIs, and scalable architecture pattern like CQRS.
               </div>
             </div>
           </div>
@@ -1254,64 +1207,64 @@
         <div class="section-label">Projects</div>
         <h2 class="section-title">What I’ve been building</h2>
         <p class="section-subtitle">
-          A mix of backend tools, console applications and web projects that show how I work with C#, .NET, databases and modern frontend.
+          Real-world applications focusing on architecture, data integrity, and solving actual user problems.
         </p>
 
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="web">Web &amp; Dashboard</button>
-          <button class="filter-btn" data-filter="console">Backend &amp; Console</button>
+          <button class="filter-btn" data-filter="web">Web &amp; AI</button>
+          <button class="filter-btn" data-filter="console">System &amp; Architecture</button>
           <button class="filter-btn" data-filter="game">Games &amp; Logic</button>
         </div>
 
         <div class="projects-grid">
           
-            <article class="project-card reveal" data-type="web backend">
+            <article class="project-card reveal" data-type="web">
                 <div class="project-image" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6);">
                     <div class="project-image-overlay"></div>
                 </div>
                 <div class="project-content">
                     <div class="project-pill">
-                        <span>💰</span> Finance Tool
+                        <span>🤖</span> AI & Blazor
                     </div>
                     <h3 class="project-title">SalaryCoach</h3>
                     <p class="project-description">
-                        A tool designed to help users track salaries, calculate taxes/benefits and project future earnings. Focus on reliable data handling and calculations.
+                        An intelligent negotiation assistant. Integrated OpenAI (GPT-4) to generate tailored negotiation scripts based on user role and company context.
                     </p>
                     <div class="project-tags">
-                        <span class="project-tag">C#</span>
-                        <span class="project-tag">.NET</span>
-                        <span class="project-tag">Calculations</span>
-                        <span class="project-tag">Logic</span>
+                        <span class="project-tag">.NET 8</span>
+                        <span class="project-tag">Blazor</span>
+                        <span class="project-tag">OpenAI API</span>
+                        <span class="project-tag">MudBlazor</span>
                     </div>
                     <div class="project-footer">
-                        <a class="project-link" href="https://github.com/b1-loop/SalaryCoach.git" target="_blank" rel="noreferrer">
+                        <a class="project-link" href="https://github.com/b1-loop/SalaryCoach" target="_blank" rel="noreferrer">
                             View Code <span>↗</span>
                         </a>
                     </div>
                 </div>
             </article>
 
-            <article class="project-card reveal" data-type="web backend">
+            <article class="project-card reveal" data-type="console backend">
                 <div class="project-image" style="background: linear-gradient(135deg, #4c1d95, #8b5cf6);">
                     <div class="project-image-overlay"></div>
                 </div>
                 <div class="project-content">
                     <div class="project-pill">
-                        <span>🎟️</span> Booking System
+                        <span>🎟️</span> Database First
                     </div>
-                    <h3 class="project-title">EventBooking</h3>
+                    <h3 class="project-title">Eventify Booking</h3>
                     <p class="project-description">
-                        A complete booking system for managing events, attendees, and tickets. Built to handle relational data and ensure smooth reservation flows.
+                        Production-style booking system. Designed a fully normalized SQL schema and implemented complex EF Core queries for ticket management.
                     </p>
                     <div class="project-tags">
-                        <span class="project-tag">C#</span>
-                        <span class="project-tag">Entity Framework</span>
-                        <span class="project-tag">SQL</span>
+                        <span class="project-tag">SQL Server</span>
+                        <span class="project-tag">EF Core</span>
+                        <span class="project-tag">Database First</span>
                         <span class="project-tag">CRUD</span>
                     </div>
                     <div class="project-footer">
-                        <a class="project-link" href="https://github.com/b1-loop/EventBooking.git" target="_blank" rel="noreferrer">
+                        <a class="project-link" href="https://github.com/b1-loop/EventBooking" target="_blank" rel="noreferrer">
                             View Code <span>↗</span>
                         </a>
                     </div>
@@ -1350,17 +1303,17 @@
                 </div>
                 <div class="project-content">
                     <div class="project-pill">
-                        <span>🧳</span> Spectre.Console
+                        <span>🧳</span> Scalable System
                     </div>
                     <h3 class="project-title">Travel Journal</h3>
                     <p class="project-description">
-                        A terminal app to plan trips, manage budgets, and log travel history. Stored in JSON. Features a rich console UI with progress bars.
+                        Large-scale system with generic DataStore repository pattern. Features 2FA, role handling, and advanced Spectre.Console UI.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">C#</span>
-                        <span class="project-tag">JSON</span>
+                        <span class="project-tag">SOLID</span>
+                        <span class="project-tag">Generics</span>
                         <span class="project-tag">Spectre.Console</span>
-                        <span class="project-tag">Team Project</span>
                     </div>
                     <div class="project-footer">
                         <a class="project-link" href="https://github.com/b1-loop/Travel-Journal" target="_blank" rel="noreferrer">
@@ -1370,23 +1323,22 @@
                 </div>
             </article>
 
-            <article class="project-card reveal" data-type="console backend game">
+             <article class="project-card reveal" data-type="console backend">
                 <div class="project-image" style="background: linear-gradient(135deg, #b91c1c, #f87171);">
                     <div class="project-image-overlay"></div>
                 </div>
                 <div class="project-content">
                     <div class="project-pill">
-                        <span>🧩</span> OOP Architecture
+                        <span>🎯</span> Productivity
                     </div>
-                    <h3 class="project-title">Quest Guild Terminal</h3>
+                    <h3 class="project-title">Quest Tracker</h3>
                     <p class="project-description">
-                        A gamified quest manager. Register, log in, and manage quests. Focus on strict OOP principles, separation of concerns and maintainable architecture.
+                        Productivity platform for goal management. Modeled a clean domain-driven architecture with LINQ-based analytics for progress tracking.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">C#</span>
-                        <span class="project-tag">OOP</span>
-                        <span class="project-tag">Design Patterns</span>
-                        <span class="project-tag">Auth</span>
+                        <span class="project-tag">Clean Architecture</span>
+                        <span class="project-tag">LINQ</span>
                     </div>
                     <div class="project-footer">
                         <a class="project-link" href="https://github.com/b1-loop/Quest-Guild-Terminal" target="_blank" rel="noreferrer">
@@ -1395,8 +1347,8 @@
                     </div>
                 </div>
             </article>
-
-            <article class="project-card reveal" data-type="game console">
+            
+             <article class="project-card reveal" data-type="game console">
                 <div class="project-image" style="background: linear-gradient(135deg, #7c2d12, #ea580c);">
                     <div class="project-image-overlay"></div>
                 </div>
@@ -1429,30 +1381,46 @@
     <section id="experience">
       <div class="container">
         <div class="section-label">Experience</div>
-        <h2 class="section-title">How I work</h2>
+        <h2 class="section-title">Career History</h2>
         <p class="section-subtitle">
-          A mix of real-world production experience at Volvo Cars and structured system development studies.
-          I like to bring discipline from industry into my code.
+          From leading production teams at Volvo to running my own business and mastering software engineering.
         </p>
 
         <div class="timeline reveal">
+            
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-role">Machine Operator &amp; Team Lead – Volvo Cars</div>
-            <div class="timeline-meta">Gothenburg · Automotive · Ongoing</div>
+            <div class="timeline-role">CEO & Founder</div>
+            <div class="timeline-meta">HB Luxury Auto Detailing · 2020 – Present</div>
             <div class="timeline-desc">
-              Working in production environments, coordinating with teams, solving problems quickly and keeping quality
-              high. This experience shapes how I think about reliability and communication in software.
+              Founded and scaled a profitable premium service business. Led strategy, operations, and customer relations, developing a strong execution mindset.
             </div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
-            <div class="timeline-role">.NET System Development Studies</div>
-            <div class="timeline-meta">NBI / Handelsakademin · Sweden</div>
+            <div class="timeline-role">Machine Operator & Team Leader</div>
+            <div class="timeline-meta">Volvo Cars · 2018 – Present</div>
             <div class="timeline-desc">
-              Focus on C#, .NET, OOP, Git, SQL and building real applications in groups. I treat school projects as
-              “mini production” to learn how teams really work and prepare for fullstack roles and LIA.
+              Ensured production quality in automated manufacturing. Led high-volume production teams, coordinated daily operations, and drove continuous process improvements.
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-role">Board Deputy Member</div>
+            <div class="timeline-meta">Casa Domini AB · 2022 – 2024</div>
+            <div class="timeline-desc">
+              Supported strategic governance and decision making. Managed the organization's website and provided IT support.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-role">.NET System Development</div>
+            <div class="timeline-meta">NBI Handelsakademin · Education</div>
+            <div class="timeline-desc">
+               Advanced C#, SQL & Relational Database Design, ASP.NET Core, and Agile methodologies.
             </div>
           </div>
         </div>
@@ -1464,50 +1432,41 @@
         <div class="section-label">Contact</div>
         <h2 class="section-title">Let’s talk</h2>
         <p class="section-subtitle">
-          I’m open for LIA internship opportunities and junior fullstack / .NET roles. If you think my profile
-          could be a match for your team, I’d be happy to hear from you.
+          I’m open for LIA internship opportunities and junior fullstack / .NET roles.
         </p>
 
         <div class="contact-card reveal">
           <div class="contact-left">
-            <h2>Let’s work together</h2>
+            <h2>Get in touch</h2>
             <p>
-              I like clear communication and honest collaboration. Reach out if you
-              want to talk about projects, LIA opportunities or how I can contribute
-              to your team.
+              Whether you have a question or want to discuss a job opportunity, I'm just an email away.
             </p>
 
             <div class="contact-based">
+              <span class="label">Phone:</span>
+              <span class="value">0762 20 80 52</span>
+            </div>
+            
+            <div class="contact-based" style="margin-top: 1rem;">
               <span class="label">Based in:</span>
               <span class="value">Gothenburg, Sweden</span>
             </div>
 
             <div class="contact-buttons">
               <a
-                href="https://www.linkedin.com/feed/"
+                href="https://linkedin.com/in/bozhidar-ivanov-48158637b"
                 target="_blank"
                 rel="noreferrer"
                 class="btn btn-primary-contact"
               >
-                👔 Contact me on LinkedIn
+                👔 LinkedIn
               </a>
 
               <a
-                href="mailto:bojidarivanov98@gmail.com?subject=Opportunity%20for%20LIA%20/%20Fullstack%20Role"
+                href="mailto:bojidarivanov98@gmail.com"
                 class="btn btn-ghost-contact"
               >
-                📧 Send me an email
-              </a>
-            </div>
-
-            <div class="contact-extra">
-              <p>Prefer GitHub?</p>
-              <a
-                href="https://github.com/b1-loop"
-                target="_blank"
-                class="btn-link"
-              >
-                💻 Visit my GitHub profile
+                📧 Email Me
               </a>
             </div>
           </div>
@@ -1534,7 +1493,7 @@
                   id="message"
                   name="message"
                   rows="4"
-                  placeholder="Tell me a bit about your opportunity or project..."
+                  placeholder="Tell me a bit about your opportunity..."
                   required
                 ></textarea>
               </div>
@@ -1542,10 +1501,6 @@
               <button type="submit" class="btn btn-gradient full-width">
                 Send message
               </button>
-
-              <p class="form-helper">
-                Your message will be delivered directly to my inbox via Formspree.
-              </p>
 
               <p id="form-status" class="form-status" aria-live="polite"></p>
             </form>
@@ -1557,7 +1512,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© 2025 Bozhidar Ivanov — Fullstack Developer</div>
+      <div>© 2026 Bozhidar Ivanov — Fullstack Developer</div>
       <div>Built with HTML, CSS &amp; curiosity.</div>
     </div>
   </footer>
@@ -1578,14 +1533,12 @@
 
     function onScroll() {
       let current = "";
-
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 120;
         if (pageYOffset >= sectionTop) {
           current = section.getAttribute("id");
         }
       });
-
       navLinks.forEach((link) => {
         link.classList.remove("active");
         if (link.getAttribute("href") === "#" + current) {
@@ -1593,13 +1546,7 @@
         }
       });
     }
-
     window.addEventListener("scroll", onScroll);
-
-    // Scroll to contact from button
-    document.getElementById('contact-btn').addEventListener('click', function() {
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-    });
 
     // Reveal on scroll
     const reveals = document.querySelectorAll(".reveal");
@@ -1612,11 +1559,8 @@
           }
         });
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
-
     reveals.forEach((el) => observer.observe(el));
 
     // Rotating hero text
@@ -1624,12 +1568,11 @@
     const rotatingPhrases = [
       "clean C# code",
       "solid .NET backends",
-      "practical console tools",
-      "better team workflows",
-      "learning fullstack step by step"
+      "scalable architecture",
+      "modern React UIs",
+      "solving real problems"
     ];
     let rotatingIndex = 0;
-
     function updateRotatingText() {
       rotatingIndex = (rotatingIndex + 1) % rotatingPhrases.length;
       rotatingText.textContent = rotatingPhrases[rotatingIndex];
@@ -1658,14 +1601,12 @@
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const filter = btn.getAttribute("data-filter");
-
         filterButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-
         projectCards.forEach((card) => {
           const type = (card.getAttribute("data-type") || "").toLowerCase();
           if (filter === "all" || type.includes(filter)) {
-            card.style.display = "flex"; // Changed to flex for the card layout
+            card.style.display = "flex";
           } else {
             card.style.display = "none";
           }
@@ -1673,26 +1614,22 @@
       });
     });
 
-    // Contact form -> Formspree with Sending/Thanks
+    // Contact form
     const contactForm = document.getElementById("contact-form");
     const statusEl = document.getElementById("form-status");
 
     if (contactForm && statusEl) {
       contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         statusEl.textContent = "Sending...";
         statusEl.className = "form-status";
-
         const formData = new FormData(contactForm);
 
         try {
           const res = await fetch(contactForm.action, {
             method: "POST",
             body: formData,
-            headers: {
-              Accept: "application/json",
-            },
+            headers: { Accept: "application/json" },
           });
 
           if (res.ok) {
