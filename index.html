@@ -168,6 +168,13 @@
       transform: translateY(-1px);
     }
 
+    /* CV Button Pulse Animation - NEW */
+    @keyframes pulse-purple {
+      0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+    }
+
     /* Download CV Button Style */
     .btn-download {
       padding: 0.35rem 0.9rem;
@@ -184,11 +191,15 @@
       gap: 0.4rem;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
+      
+      /* Apply the pulse animation */
+      animation: pulse-purple 2s infinite;
     }
     
     .btn-download:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 40px rgba(88, 28, 135, 0.6);
+        /* Keep animation running on hover */
     }
 
     /* Hero section */
@@ -568,12 +579,12 @@
         border: 1px solid rgba(148, 163, 184, 0.2);
     }
     
-    /* GitHub Card Styling - NEW */
+    /* GitHub Card Styling */
     .github-card {
         margin-top: 1rem;
         padding: 1rem;
         border-radius: 14px;
-        background: rgba(15, 23, 42, 0.6); /* Slightly transparent dark */
+        background: rgba(15, 23, 42, 0.6);
         border: 1px solid rgba(148, 163, 184, 0.3);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(10px);
@@ -609,9 +620,9 @@
     }
 
     .github-chart-wrapper {
-        overflow-x: auto; /* Allows scroll on mobile */
+        overflow-x: auto;
         white-space: nowrap;
-        scrollbar-width: thin; /* Firefox */
+        scrollbar-width: thin;
         scrollbar-color: var(--muted) transparent;
         padding-bottom: 0.5rem;
     }
@@ -627,16 +638,10 @@
 
     .github-chart-wrapper img {
         width: 100%;
-        min-width: 600px; /* Ensures chart is readable even on phone (scrolls) */
+        min-width: 600px;
         height: auto;
         display: block;
         opacity: 0.9;
-    }
-    
-    .badge-container {
-        margin-top: 0.8rem;
-        display: flex;
-        align-items: center;
     }
 
     .skills-grid {
@@ -1383,10 +1388,9 @@
                 <div class="github-chart-wrapper">
                     <img src="https://ghchart.rshah.org/8b5cf6/b1-loop" alt="Bozhidar's GitHub Chart" />
                 </div>
-                
-                <div class="badge-container">
-                    <img src="https://img.shields.io/badge/dynamic/json?color=8b5cf6&label=Contributions%20(Year)&query=%24.total.lastYear&url=https%3A%2F%2Fgithub-contributions-api.jogruber.de%2Fv4%2Fb1-loop&style=flat-square&logo=github" alt="GitHub Contributions" />
-                </div>
+                <div style="font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem;">
+                  500+ contributions in the last year. Always coding.
+               </div>
             </div>
 
           </div>
