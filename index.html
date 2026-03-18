@@ -42,14 +42,14 @@
             </nav>
             <div class="nav-cta">
                 <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="icon-link" aria-label="GitHub">
-                    👨‍💻
+                    <i class="devicon-github-original"></i>
                 </a>
-                <a href="https://www.linkedin.com/feed/"
+                <a href="https://linkedin.com/in/bozhidar-ivanov-48158637b"
                    target="_blank"
                    rel="noreferrer"
                    class="icon-link"
                    aria-label="LinkedIn">
-                    🔗
+                    <i class="devicon-linkedin-plain"></i>
                 </a>
                 <a class="btn-download" href="cv.pdf" target="_blank">
                     <span>📄</span> Download CV
@@ -72,6 +72,15 @@
             <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
             <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
         </ul>
+        <div class="mobile-nav-footer">
+            <a href="https://github.com/b1-loop" target="_blank" rel="noreferrer" class="mobile-nav-icon" aria-label="GitHub">
+                <i class="devicon-github-original"></i>
+            </a>
+            <a href="https://linkedin.com/in/bozhidar-ivanov-48158637b" target="_blank" rel="noreferrer" class="mobile-nav-icon" aria-label="LinkedIn">
+                <i class="devicon-linkedin-plain"></i>
+            </a>
+            <a href="cv.pdf" target="_blank" class="mobile-nav-cv">📄 Download CV</a>
+        </div>
     </div>
 
     <main>
@@ -221,19 +230,19 @@
                         <div class="skills-grid">
                             <div class="skill-item active" data-description="Expertise in C#, .NET Core, Minimal APIs, and scalable architecture pattern like CQRS.">
                                 <span class="skill-name">C# / .NET</span>
-                                <span class="skill-level">Advanced</span>
+                                <span class="skill-level skill-level--advanced">Advanced</span>
                             </div>
                             <div class="skill-item" data-description="Experience with SQL Server, relational design, normalization, and Entity Framework Core.">
                                 <span class="skill-name">SQL &amp; Data</span>
-                                <span class="skill-level">Advanced</span>
+                                <span class="skill-level skill-level--advanced">Advanced</span>
                             </div>
                             <div class="skill-item" data-description="Building modern web apps with React, Tailwind CSS, TanStack Query and Blazor.">
                                 <span class="skill-name">Frontend</span>
-                                <span class="skill-level">Intermediate</span>
+                                <span class="skill-level skill-level--intermediate">Intermediate</span>
                             </div>
                             <div class="skill-item" data-description="Version control with Git, GitHub Flow, Pull Requests, and CI/CD pipelines (GitHub Actions).">
                                 <span class="skill-name">DevOps</span>
-                                <span class="skill-level">Tools</span>
+                                <span class="skill-level skill-level--tools">Tools</span>
                             </div>
                         </div>
 
@@ -666,12 +675,12 @@
                               method="POST">
                             <div class="field-group">
                                 <label for="name">Name</label>
-                                <input id="name" name="name" type="text" placeholder="Your name" required />
+                                <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
                             </div>
 
                             <div class="field-group">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+                                <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
                             </div>
 
                             <div class="field-group">
