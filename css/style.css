@@ -21,6 +21,11 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
 }
 
 /* 1. Custom Scrollbar */
@@ -53,6 +58,7 @@ body {
     background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
     color: var(--text);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 /* Scroll progress bar */
@@ -270,6 +276,11 @@ section {
     grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
     gap: 3rem;
     align-items: center;
+    width: 100%;
+}
+
+.hero-grid > * {
+    min-width: 0;
 }
 
 .hero-profile-container {
@@ -396,7 +407,7 @@ section {
     }
 
     section {
-        padding: 3rem 0;
+        padding: 2.5rem 0;
     }
 
     .nav ul {
@@ -416,8 +427,32 @@ section {
         padding: 0.3rem 0.7rem;
     }
 
+    /* hero-stats: 1 column on mobile — 3 columns is too cramped */
     .hero-stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .hero-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .hero-stat strong {
+        display: inline;
+        font-size: 0.9rem;
+    }
+
+    .hero-stat span {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-align: right;
+    }
+
+    .hero-card {
+        padding: 1.2rem 1rem;
     }
 
     .hero-card-footer {
@@ -441,13 +476,22 @@ section {
     .contact-extra {
         margin-top: 1rem;
     }
-}
 
-@media (max-width: 480px) {
-    .hero-stats {
+    /* Prevent skills grid from overflowing */
+    .skills-grid {
         grid-template-columns: 1fr;
     }
 
+    .skill-details {
+        word-break: break-word;
+    }
+
+    .github-card {
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 480px) {
     .nav-cta .icon-link {
         display: none;
     }
@@ -473,6 +517,24 @@ section {
     .contact-buttons .btn {
         text-align: center;
         justify-content: center;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .hero-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .skill-chips {
+        gap: 0.4rem;
+    }
+
+    .gh-achievements-list {
+        gap: 0.5rem;
     }
 }
 
@@ -797,6 +859,11 @@ section {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: 2.5rem;
+    width: 100%;
+}
+
+.about-grid > * {
+    min-width: 0;
 }
 
 @media (max-width: 800px) {
@@ -915,10 +982,11 @@ section {
 
     .github-chart-wrapper img {
         width: 100%;
-        min-width: 600px;
+        min-width: 500px;
         height: auto;
         display: block;
         opacity: 0.9;
+        max-width: none;
     }
 
 .github-footer {
