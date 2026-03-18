@@ -1,3 +1,25 @@
+// Hamburger menu
+const menuToggle = document.getElementById("menu-toggle");
+const mobileNav = document.getElementById("mobile-nav");
+
+menuToggle.addEventListener("click", () => {
+    const isOpen = mobileNav.classList.toggle("open");
+    menuToggle.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", isOpen);
+    mobileNav.setAttribute("aria-hidden", !isOpen);
+    document.body.style.overflow = isOpen ? "hidden" : "";
+});
+
+document.querySelectorAll(".mobile-nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        menuToggle.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        mobileNav.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    });
+});
+
 // Set dynamic year
 document.getElementById("year").textContent = new Date().getFullYear();
 

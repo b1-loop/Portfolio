@@ -296,10 +296,91 @@ section {
         filter: grayscale(0%);
     }
 
+/* ===== HAMBURGER MENU ===== */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 0.5rem;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.menu-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Nav Overlay */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(5, 8, 22, 0.97);
+    backdrop-filter: blur(16px);
+    z-index: 49;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.mobile-nav.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.mobile-nav-link {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+}
+
+.mobile-nav-link:hover {
+    color: var(--accent);
+}
+
 @media (max-width: 800px) {
     .hero-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
     }
 
     .hero-right {
@@ -307,15 +388,91 @@ section {
     }
 
     header {
-        position: static;
+        position: sticky;
     }
 
     #hero {
         padding-top: 1.5rem;
     }
 
+    section {
+        padding: 3rem 0;
+    }
+
     .nav ul {
         display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: flex;
+    }
+
+    .btn-download {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .gh-achievements-list {
+        flex-wrap: wrap;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .contact-extra {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-cta .icon-link {
+        display: none;
+    }
+
+    .hero-meta {
+        gap: 0.75rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn-primary,
+    .hero-actions .btn-ghost {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .contact-buttons .btn {
+        text-align: center;
+        justify-content: center;
     }
 }
 
