@@ -215,6 +215,74 @@ if (contactForm && statusEl) {
     });
 }
 
+// === DARK / LIGHT MODE TOGGLE ===
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('theme-icon-moon');
+const sunIcon = document.getElementById('theme-icon-sun');
+const htmlEl = document.documentElement;
+
+function applyTheme(theme) {
+    document.body.classList.add('theme-transition');
+    htmlEl.setAttribute('data-theme', theme);
+    if (theme === 'light') {
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+    } else {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+    }
+    setTimeout(() => document.body.classList.remove('theme-transition'), 500);
+}
+
+const savedTheme = localStorage.getItem('theme') || 'dark';
+applyTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+});
+
+// === SKILLS TABS ===
+const skillsTabs = document.querySelectorAll('.skills-tab');
+const skillsContents = document.querySelectorAll('.skills-tab-content');
+
+function animateSkillBars(container) {
+    container.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = width + '%'; }, i * 90);
+    });
+}
+
+skillsTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        skillsTabs.forEach(t => t.classList.remove('active'));
+        skillsContents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        const content = document.querySelector(`.skills-tab-content[data-content="${tab.getAttribute('data-tab')}"]`);
+        if (content) {
+            content.classList.add('active');
+            animateSkillBars(content);
+        }
+    });
+});
+
+// Animate skill bars when about section enters view
+const aboutSection = document.getElementById('about');
+if (aboutSection) {
+    const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const active = entry.target.querySelector('.skills-tab-content.active');
+                if (active) animateSkillBars(active);
+                skillsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+    skillsObserver.observe(aboutSection);
+}
+
 // Console Easter Egg
 console.log(
     "%c👋 Hi there! Looking for the source code?",
