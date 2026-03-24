@@ -20,6 +20,14 @@ document.querySelectorAll(".mobile-nav-link").forEach(link => {
     });
 });
 
+// Contact scroll button
+const contactScrollBtn = document.getElementById('contact-scroll-btn');
+if (contactScrollBtn) {
+    contactScrollBtn.addEventListener('click', () => {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+}
+
 // Set dynamic year
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -281,6 +289,257 @@ if (aboutSection) {
         });
     }, { threshold: 0.2 });
     skillsObserver.observe(aboutSection);
+}
+
+// === CURSOR GLOW ===
+const cursorGlow = document.getElementById('cursor-glow');
+if (cursorGlow) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    });
+}
+
+// === HERO TERMINAL ANIMATION ===
+const terminalBody = document.getElementById('terminal-body');
+const termLines = [
+    { type: 'cmd', text: 'dotnet new webapi -n CleanAPI' },
+    { type: 'out', text: 'Build succeeded ✓' },
+    { type: 'cmd', text: 'git commit -m "feat: clean architecture"' },
+    { type: 'out', text: '[main] 1 commit · ready to ship 🚀' },
+    { type: 'cmd', text: 'docker-compose up --build' },
+    { type: 'out', text: 'Container running on :5000 ✓' },
+];
+
+let termLineIdx = 0;
+
+function startTerminal() {
+    if (!terminalBody) return;
+    terminalBody.innerHTML = '';
+    termLineIdx = 0;
+    runTermLine();
+}
+
+function runTermLine() {
+    if (termLineIdx >= termLines.length) {
+        setTimeout(startTerminal, 2800);
+        return;
+    }
+
+    const entry = termLines[termLineIdx];
+    const line = document.createElement('div');
+    line.className = 'terminal-line';
+
+    if (entry.type === 'out') {
+        line.innerHTML = `<span class="terminal-out-text">${entry.text}</span>`;
+        terminalBody.appendChild(line);
+        termLineIdx++;
+        setTimeout(runTermLine, 380);
+    } else {
+        line.innerHTML = `<span class="terminal-prompt">$</span><span class="terminal-cmd-text"></span><span class="terminal-blink">▋</span>`;
+        terminalBody.appendChild(line);
+
+        const cmdEl = line.querySelector('.terminal-cmd-text');
+        const blink = line.querySelector('.terminal-blink');
+        let charIdx = 0;
+
+        function typeChar() {
+            if (charIdx < entry.text.length) {
+                cmdEl.textContent += entry.text[charIdx];
+                charIdx++;
+                setTimeout(typeChar, 48 + Math.random() * 38);
+            } else {
+                blink.remove();
+                termLineIdx++;
+                setTimeout(runTermLine, 260);
+            }
+        }
+        typeChar();
+    }
+}
+
+if (terminalBody) {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(startTerminal, 600);
+    });
+}
+
+// === COUNTER ANIMATION ===
+const counters = document.querySelectorAll('.counter-num');
+let countersStarted = false;
+
+function animateCounters() {
+    if (countersStarted) return;
+    countersStarted = true;
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10);
+        const duration = 1400;
+        const step = Math.ceil(target / (duration / 16));
+        let current = 0;
+        const tick = () => {
+            current = Math.min(current + step, target);
+            counter.textContent = current;
+            if (current < target) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    });
+}
+
+const heroSection = document.querySelector('#hero');
+if (heroSection) {
+    const counterObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            animateCounters();
+            counterObserver.disconnect();
+        }
+    }, { threshold: 0.3 });
+    counterObserver.observe(heroSection);
+}
+
+
+// === SKILLS CONSTELLATION ===
+const constellationWrap = document.getElementById('constellation');
+const cSvg = document.getElementById('c-svg');
+
+const cNodes = [
+    { id: 'cs',      label: 'C#',           x: 50,  y: 20,  color: '#a78bfa' },
+    { id: 'net',     label: '.NET',          x: 30,  y: 45,  color: '#8b5cf6' },
+    { id: 'asp',     label: 'ASP.NET',       x: 70,  y: 45,  color: '#7c3aed' },
+    { id: 'ef',      label: 'EF Core',       x: 20,  y: 70,  color: '#6d28d9' },
+    { id: 'sql',     label: 'SQL',           x: 50,  y: 72,  color: '#06b6d4' },
+    { id: 'react',   label: 'React',         x: 78,  y: 68,  color: '#38bdf8' },
+    { id: 'docker',  label: 'Docker',        x: 15,  y: 50,  color: '#67e8f9' },
+    { id: 'git',     label: 'Git',           x: 85,  y: 30,  color: '#4ade80' },
+    { id: 'azure',   label: 'Azure',         x: 62,  y: 15,  color: '#60a5fa' },
+    { id: 'js',      label: 'JavaScript',    x: 88,  y: 55,  color: '#fbbf24' },
+];
+
+const cEdges = [
+    ['cs','net'],['cs','asp'],['cs','azure'],['cs','git'],
+    ['net','asp'],['net','ef'],['net','docker'],
+    ['asp','sql'],['asp','react'],
+    ['ef','sql'],
+    ['react','js'],['react','git'],
+    ['sql','docker'],
+    ['azure','git'],['azure','docker'],
+    ['js','git'],
+];
+
+function buildConstellation() {
+    if (!constellationWrap || !cSvg) return;
+    const W = constellationWrap.clientWidth || 400;
+    const H = constellationWrap.clientHeight || 280;
+    cSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    cSvg.innerHTML = '';
+
+    const pos = {};
+    cNodes.forEach(n => {
+        pos[n.id] = { x: (n.x / 100) * W, y: (n.y / 100) * H };
+    });
+
+    // Draw edges
+    cEdges.forEach(([a, b]) => {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', pos[a].x);
+        line.setAttribute('y1', pos[a].y);
+        line.setAttribute('x2', pos[b].x);
+        line.setAttribute('y2', pos[b].y);
+        line.setAttribute('stroke', 'rgba(139,92,246,0.25)');
+        line.setAttribute('stroke-width', '1');
+        line.classList.add('c-edge');
+        cSvg.appendChild(line);
+    });
+
+    // Draw nodes
+    cNodes.forEach(n => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.classList.add('c-node');
+        g.setAttribute('data-id', n.id);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', pos[n.id].x);
+        circle.setAttribute('cy', pos[n.id].y);
+        circle.setAttribute('r', '7');
+        circle.setAttribute('fill', n.color);
+        circle.setAttribute('filter', 'url(#node-glow)');
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', pos[n.id].x);
+        text.setAttribute('y', pos[n.id].y + 19);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', '#e5e7eb');
+        text.setAttribute('font-size', '10');
+        text.setAttribute('font-family', 'Poppins, sans-serif');
+        text.textContent = n.label;
+
+        g.appendChild(circle);
+        g.appendChild(text);
+
+        g.addEventListener('mouseenter', () => {
+            circle.setAttribute('r', '10');
+            // Highlight connected edges
+            cEdges.forEach(([a, b], i) => {
+                if (a === n.id || b === n.id) {
+                    cSvg.querySelectorAll('.c-edge')[i].setAttribute('stroke', 'rgba(139,92,246,0.7)');
+                    cSvg.querySelectorAll('.c-edge')[i].setAttribute('stroke-width', '1.5');
+                }
+            });
+        });
+        g.addEventListener('mouseleave', () => {
+            circle.setAttribute('r', '7');
+            cSvg.querySelectorAll('.c-edge').forEach(e => {
+                e.setAttribute('stroke', 'rgba(139,92,246,0.25)');
+                e.setAttribute('stroke-width', '1');
+            });
+        });
+
+        cSvg.appendChild(g);
+    });
+
+    // SVG filter for node glow
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    defs.innerHTML = `<filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>`;
+    cSvg.insertBefore(defs, cSvg.firstChild);
+}
+
+// Build when Map tab is clicked
+document.querySelectorAll('.skills-tab').forEach(tab => {
+    if (tab.getAttribute('data-tab') === 'map') {
+        tab.addEventListener('click', () => {
+            setTimeout(buildConstellation, 50);
+        });
+    }
+});
+
+// === ANIMATED TIMELINE ===
+const timelineEl = document.querySelector('.timeline');
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+if (timelineEl) {
+    // Animate the vertical line drawing down
+    const tlLineObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            timelineEl.classList.add('tl-active');
+            tlLineObserver.disconnect();
+        }
+    }, { threshold: 0.05 });
+    tlLineObserver.observe(timelineEl);
+
+    // Animate each item sliding in
+    const tlItemObserver = new IntersectionObserver(entries => {
+        entries.forEach((entry, idx) => {
+            if (entry.isIntersecting) {
+                const delay = Array.from(timelineItems).indexOf(entry.target) * 120;
+                setTimeout(() => entry.target.classList.add('tl-visible'), delay);
+                tlItemObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
+
+    timelineItems.forEach(item => tlItemObserver.observe(item));
 }
 
 // Console Easter Egg
