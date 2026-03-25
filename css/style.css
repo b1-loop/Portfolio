@@ -2331,41 +2331,67 @@ footer {
 [data-theme="light"] .skill-bar-track {
     background: rgba(148, 163, 184, 0.2);
 }
+[data-theme="light"] .skills-panel {
+    background: rgba(255,255,255,0.75);
+    border-color: rgba(139,92,246,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 0 60px rgba(139,92,246,0.05);
+}
 
 [data-theme="light"] .section-subtitle {
     color: var(--muted);
 }
 
 /* ===== SKILLS TABS ===== */
+.skills-panel {
+    background: rgba(10, 16, 35, 0.7);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    padding: 1.4rem 1.5rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 0 1px rgba(139,92,246,0.06), 0 8px 32px rgba(0,0,0,0.35), 0 0 60px rgba(139,92,246,0.06);
+    margin-bottom: 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+.skills-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #8b5cf6, #ec4899, transparent);
+    border-radius: 20px 20px 0 0;
+}
+
 .skills-tabs {
     display: flex;
     gap: 0.4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     flex-wrap: wrap;
 }
 
 .skills-tab {
-    padding: 0.3rem 0.85rem;
+    padding: 0.32rem 0.9rem;
     border-radius: 999px;
-    border: 1px solid rgba(148, 163, 184, 0.4);
-    background: none;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(255,255,255,0.04);
     color: var(--muted);
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     cursor: pointer;
     transition: all var(--transition-fast);
 }
 
 .skills-tab:hover {
-    border-color: var(--accent);
+    border-color: rgba(139,92,246,0.5);
     color: var(--text);
+    background: rgba(139,92,246,0.08);
 }
 
 .skills-tab.active {
     background: linear-gradient(135deg, #6366f1, #a855f7);
     border-color: transparent;
     color: #fff;
-    box-shadow: 0 8px 20px rgba(88, 28, 135, 0.45);
+    box-shadow: 0 4px 16px rgba(88, 28, 135, 0.4);
 }
 
 .skills-tab-content {
@@ -2414,8 +2440,8 @@ footer {
 }
 
 .skill-bar-track {
-    height: 6px;
-    background: rgba(148, 163, 184, 0.15);
+    height: 8px;
+    background: rgba(148, 163, 184, 0.1);
     border-radius: 999px;
     overflow: hidden;
 }
@@ -2424,8 +2450,18 @@ footer {
     height: 100%;
     width: 0;
     border-radius: 999px;
-    background: linear-gradient(90deg, #6366f1, #a855f7);
+    background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
     transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.skill-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25));
+    border-radius: 999px;
 }
 
 /* ===== CURSOR GLOW ===== */
