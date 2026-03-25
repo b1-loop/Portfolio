@@ -730,6 +730,178 @@ document.querySelectorAll('.project-card').forEach(card => {
     ctaBtn && ctaBtn.addEventListener('click', hideOverlay);
 })();
 
+// === PROJECT SHOWCASE — browse all projects in big card ===
+(function () {
+    const projects = [
+        {
+            title: 'Restaurant Platform',
+            pill: '🍽️ Web App · Full Stack',
+            desc: 'A production-grade restaurant booking and ordering system deployed for a real client. Features real-time table management, ordering flow, and a custom React frontend backed by a C# / ASP.NET Core Web API.',
+            tags: ['C# / .NET', 'React', 'SQL Server', 'Web API'],
+            img: 'https://image.thum.io/get/width/1200/crop/630/https://muchachotapas.se/',
+            live: 'https://muchachotapas.se/',
+            code: 'https://github.com/b1-loop/ResturangTest',
+        },
+        {
+            title: 'Tuggets Portal',
+            pill: '🍔 Management',
+            desc: 'A scalable fullstack application built to streamline data handling and operational management with clear separation of concerns.',
+            tags: ['C#', '.NET 8', 'SQL Server'],
+            img: 'https://image.thum.io/get/width/1200/crop/630/https://b1-loop.github.io/TuggetsPP/',
+            live: 'https://b1-loop.github.io/TuggetsPP/',
+            code: 'https://github.com/b1-loop/TuggetsPP',
+        },
+        {
+            title: 'Loop Portal',
+            pill: '🌐 Portal',
+            desc: 'A centralized portal environment integrating various administrative tools, featuring role-based access control and an intuitive user dashboard.',
+            tags: ['Fullstack', '.NET', 'UI/UX'],
+            img: 'https://image.thum.io/get/width/1200/crop/630/https://b1-loop.github.io/loop-portal/',
+            live: 'https://b1-loop.github.io/loop-portal/',
+            code: 'https://github.com/b1-loop/loop-portal',
+        },
+        {
+            title: 'Salary Helper',
+            pill: '💰 Finance Tool',
+            desc: 'A practical utility application designed to calculate, track, and manage salary expectations and historical data with precision.',
+            tags: ['.NET', 'Calculations', 'Web'],
+            emoji: '💰', bg: 'preview-web',
+            code: 'https://github.com/b1-loop/SalaryHelper',
+        },
+        {
+            title: 'SalaryCoach',
+            pill: '🤖 AI & Blazor',
+            desc: 'An intelligent negotiation assistant. Integrated OpenAI (GPT-4) to generate tailored negotiation scripts based on user role and company context.',
+            tags: ['.NET 8', 'Blazor', 'OpenAI API', 'MudBlazor'],
+            emoji: '🤖', bg: 'preview-ai',
+            code: 'https://github.com/b1-loop/SalaryCoach',
+        },
+        {
+            title: 'Eventify Booking',
+            pill: '🎟️ Database First',
+            desc: 'Production-style booking system. Designed a fully normalized SQL schema and implemented complex EF Core queries for ticket management.',
+            tags: ['SQL Server', 'EF Core', 'Database First', 'CRUD'],
+            emoji: '🎟️', bg: 'preview-db',
+            code: 'https://github.com/b1-loop/EventBooking',
+        },
+        {
+            title: 'GitHub Dashboard',
+            pill: '📊 API Integration',
+            desc: 'A visual dashboard that interacts with the GitHub API to display user statistics, repository data, and commit history in a clean UI.',
+            tags: ['JavaScript/React', 'REST API', 'JSON', 'Frontend'],
+            emoji: '📊', bg: 'preview-web',
+            code: 'https://github.com/b1-loop/github---dashboard.git',
+        },
+        {
+            title: 'Travel Journal',
+            pill: '🧳 Scalable System',
+            desc: 'Large-scale system with generic DataStore repository pattern. Features 2FA, role handling, and advanced Spectre.Console UI.',
+            tags: ['C#', 'SOLID', 'Generics', 'Spectre.Console'],
+            emoji: '🧳', bg: 'preview-sys',
+            code: 'https://github.com/b1-loop/Travel-Journal',
+        },
+        {
+            title: 'Quest Tracker',
+            pill: '🎯 Productivity',
+            desc: 'Productivity platform for goal management. Modeled a clean domain-driven architecture with LINQ-based analytics for progress tracking.',
+            tags: ['C#', 'Clean Architecture', 'LINQ'],
+            emoji: '🎯', bg: 'preview-sys',
+            code: 'https://github.com/b1-loop/Quest-Guild-Terminal',
+        },
+        {
+            title: 'Labyrinth Game',
+            pill: '🕹️ Logic Game',
+            desc: 'A C# logic game where players navigate a maze. Demonstrates algorithmic thinking, pathfinding logic, and object-oriented game state management.',
+            tags: ['C#', 'Algorithms', 'Logic', 'Teamwork'],
+            emoji: '🕹️', bg: 'preview-game',
+            code: 'https://github.com/Jocke-1994/LabyrinthGame.git',
+        },
+    ];
+
+    let current = 0;
+
+    const inner    = document.getElementById('showcase-inner');
+    const imgEl    = document.getElementById('showcase-img');
+    const bgEl     = document.getElementById('showcase-bg');
+    const livePill = document.getElementById('showcase-live-pill');
+    const pillEl   = document.getElementById('showcase-pill');
+    const titleEl  = document.getElementById('showcase-title');
+    const descEl   = document.getElementById('showcase-desc');
+    const tagsEl   = document.getElementById('showcase-tags');
+    const linksEl  = document.getElementById('showcase-links');
+    const curEl    = document.getElementById('showcase-cur');
+    const totalEl  = document.getElementById('showcase-total');
+    const prevBtn  = document.getElementById('showcase-prev');
+    const nextBtn  = document.getElementById('showcase-next');
+
+    if (!inner) return;
+
+    if (totalEl) totalEl.textContent = projects.length;
+
+    function render(p) {
+        pillEl.textContent  = p.pill;
+        titleEl.textContent = p.title;
+        descEl.textContent  = p.desc;
+
+        // image or emoji bg
+        if (p.img) {
+            imgEl.src = p.img;
+            imgEl.alt = p.title;
+            imgEl.style.display = 'block';
+            bgEl.style.display = 'none';
+            bgEl.className = 'showcase-bg';
+            livePill.style.display = p.live ? 'block' : 'none';
+        } else {
+            imgEl.style.display = 'none';
+            bgEl.style.display = 'flex';
+            bgEl.className = `showcase-bg ${p.bg || ''}`;
+            bgEl.textContent = p.emoji || '';
+            livePill.style.display = 'none';
+        }
+
+        // tags
+        tagsEl.innerHTML = p.tags.map(t => `<span class="project-tag">${t}</span>`).join('');
+
+        // links
+        linksEl.innerHTML = '';
+        if (p.live) {
+            const a = document.createElement('a');
+            a.href = p.live; a.target = '_blank'; a.rel = 'noreferrer';
+            a.className = 'btn-primary'; a.textContent = '▶ Live Site';
+            linksEl.appendChild(a);
+        }
+        if (p.code) {
+            const a = document.createElement('a');
+            a.href = p.code; a.target = '_blank'; a.rel = 'noreferrer';
+            a.className = 'btn-ghost'; a.textContent = '</> Code';
+            linksEl.appendChild(a);
+        }
+
+        if (curEl) curEl.textContent = current + 1;
+    }
+
+    function goTo(idx) {
+        inner.classList.add('switching');
+        setTimeout(() => {
+            current = (idx + projects.length) % projects.length;
+            render(projects[current]);
+            inner.classList.remove('switching');
+        }, 220);
+    }
+
+    prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // keyboard arrows when showcase is in view
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // init
+    render(projects[0]);
+})();
+
 // === FEATURE 12: SCROLL-TRIGGERED KEYWORD HIGHLIGHT ===
 (function () {
     const hlWords = document.querySelectorAll('.hl-word');

@@ -805,28 +805,25 @@
                     Real-world applications focusing on architecture, data integrity, and solving actual user problems.
                 </p>
 
-                <!-- Featured Project Spotlight -->
-                <div class="featured-project reveal">
-                    <div class="featured-badge">⭐ Featured Project</div>
-                    <div class="featured-inner">
-                        <div class="featured-img-wrap">
-                            <img src="https://image.thum.io/get/width/1200/crop/630/https://muchachotapas.se/" alt="Restaurant Platform" class="featured-img" loading="lazy">
-                            <div class="featured-live-pill">🟢 Live</div>
+                <!-- Project Showcase — navigates through all projects -->
+                <div class="showcase-wrap reveal">
+                    <div class="showcase-nav">
+                        <button class="showcase-arrow" id="showcase-prev" aria-label="Previous project">&#8592;</button>
+                        <span class="showcase-counter"><span id="showcase-cur">1</span> / <span id="showcase-total">10</span></span>
+                        <button class="showcase-arrow" id="showcase-next" aria-label="Next project">&#8594;</button>
+                    </div>
+                    <div class="showcase-inner" id="showcase-inner">
+                        <div class="showcase-img-wrap" id="showcase-img-wrap">
+                            <img id="showcase-img" src="" alt="" class="showcase-img" style="display:none">
+                            <div id="showcase-bg" class="showcase-bg"></div>
+                            <div class="showcase-live-pill" id="showcase-live-pill" style="display:none">🟢 Live</div>
                         </div>
-                        <div class="featured-info">
-                            <div class="project-pill"><span>🍽️</span> Web App · Full Stack</div>
-                            <h3 class="featured-title">Restaurant Platform</h3>
-                            <p class="featured-desc">A production-grade restaurant booking and ordering system deployed for a real client. Features real-time table management, ordering flow, and a fully custom React frontend backed by a C# / ASP.NET Core Web API with SQL Server.</p>
-                            <div class="featured-tags">
-                                <span class="project-tag"><i class="devicon-csharp-plain colored"></i> C# / .NET</span>
-                                <span class="project-tag"><i class="devicon-react-original colored"></i> React</span>
-                                <span class="project-tag"><i class="devicon-microsoftsqlserver-plain colored"></i> SQL Server</span>
-                                <span class="project-tag">Web API</span>
-                            </div>
-                            <div class="featured-links">
-                                <a class="btn-primary" href="https://muchachotapas.se/" target="_blank" rel="noreferrer">▶ View Live Site</a>
-                                <a class="btn-ghost featured-code-btn" href="https://github.com/b1-loop/ResturangTest" target="_blank" rel="noreferrer">&lt;/&gt; Source Code</a>
-                            </div>
+                        <div class="showcase-info">
+                            <div class="project-pill" id="showcase-pill"></div>
+                            <h3 class="showcase-title" id="showcase-title"></h3>
+                            <p class="showcase-desc" id="showcase-desc"></p>
+                            <div class="showcase-tags" id="showcase-tags"></div>
+                            <div class="showcase-links" id="showcase-links"></div>
                         </div>
                     </div>
                 </div>
