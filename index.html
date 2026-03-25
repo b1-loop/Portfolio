@@ -55,6 +55,20 @@
     </script>
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#hero" class="skip-link">Skip to main content</a>
+
+    <!-- Easter egg overlay — type "hireme" -->
+    <div id="hire-me-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="You found the easter egg!">
+        <div class="hire-me-box">
+            <div class="hire-me-emoji">🎉</div>
+            <h2 class="hire-me-title">You found the Easter egg!</h2>
+            <p class="hire-me-sub">Persistent enough to type "hire me" — that's the kind of developer I am too.</p>
+            <a href="#contact" class="btn-primary hire-me-cta" id="hire-me-cta">Let's talk →</a>
+            <button class="hire-me-close" id="hire-me-close" aria-label="Close">✕</button>
+        </div>
+    </div>
+
     <!-- Reusable SVG gradient for wave separators -->
     <svg style="display:none" aria-hidden="true">
         <defs>
@@ -101,6 +115,8 @@
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
                     <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                     <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <!-- Neon theme icon (⚡ bolt) -->
+                    <svg id="theme-icon-neon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 </button>
                 <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
@@ -135,6 +151,12 @@
 
         <!-- ===== HERO ===== -->
         <section id="hero">
+            <!-- Animated gradient mesh orbs (Feature 3) -->
+            <div class="hero-bg" aria-hidden="true">
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="hero-orb hero-orb-3"></div>
+            </div>
             <div class="container hero-grid">
                 <div class="hero-left reveal">
                     <div class="eyebrow">
@@ -251,6 +273,17 @@
                                 <div class="gh-achievements-list">
                                     <div class="gh-badge">🦈 <span>Pull Shark x2</span></div>
                                     <div class="gh-badge">🤠 <span>Quickdraw</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Currently Learning widget (Feature 10) -->
+                            <div class="currently-learning">
+                                <div class="cl-label">📚 Currently Learning</div>
+                                <div class="cl-chips">
+                                    <span class="cl-chip">Kubernetes</span>
+                                    <span class="cl-chip">gRPC</span>
+                                    <span class="cl-chip">DDD</span>
+                                    <span class="cl-chip">Microservices</span>
                                 </div>
                             </div>
 

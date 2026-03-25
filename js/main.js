@@ -223,22 +223,22 @@ if (contactForm && statusEl) {
     });
 }
 
-// === DARK / LIGHT MODE TOGGLE ===
+// === DARK / LIGHT / NEON MODE TOGGLE ===
 const themeToggle = document.getElementById('theme-toggle');
 const moonIcon = document.getElementById('theme-icon-moon');
 const sunIcon = document.getElementById('theme-icon-sun');
+const neonIcon = document.getElementById('theme-icon-neon');
 const htmlEl = document.documentElement;
+
+const themeOrder = ['dark', 'light', 'neon'];
 
 function applyTheme(theme) {
     document.body.classList.add('theme-transition');
     htmlEl.setAttribute('data-theme', theme);
-    if (theme === 'light') {
-        moonIcon.style.display = 'none';
-        sunIcon.style.display = 'block';
-    } else {
-        moonIcon.style.display = 'block';
-        sunIcon.style.display = 'none';
-    }
+    moonIcon.style.display = theme === 'dark'  ? 'block' : 'none';
+    sunIcon.style.display  = theme === 'light' ? 'block' : 'none';
+    neonIcon.style.display = theme === 'neon'  ? 'block' : 'none';
+    themeToggle.title = theme === 'dark' ? 'Switch to Light' : theme === 'light' ? 'Switch to Neon' : 'Switch to Dark';
     setTimeout(() => document.body.classList.remove('theme-transition'), 500);
 }
 
@@ -246,7 +246,9 @@ const savedTheme = localStorage.getItem('theme') || 'dark';
 applyTheme(savedTheme);
 
 themeToggle.addEventListener('click', () => {
-    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    const current = htmlEl.getAttribute('data-theme');
+    const idx = themeOrder.indexOf(current);
+    const next = themeOrder[(idx + 1) % themeOrder.length];
     localStorage.setItem('theme', next);
     applyTheme(next);
 });
@@ -576,3 +578,85 @@ console.log(
     "%cNice to meet you! If you're checking my console, we should probably talk code. Feel free to email me at bojidarivanov98@gmail.com",
     "color: #e5e7eb; font-size: 14px;"
 );
+
+// === FEATURE 2: PROJECT CARD SLIDE-UP OVERLAY ===
+document.querySelectorAll('.project-card').forEach(card => {
+    const titleEl = card.querySelector('.project-title');
+    const descEl  = card.querySelector('.project-description');
+    const codeLink = card.querySelector('.project-link:not(.live)');
+    const liveLink = card.querySelector('.project-link.live');
+
+    const overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'card-overlay-title';
+    titleDiv.textContent = titleEl ? titleEl.textContent : '';
+
+    const descDiv = document.createElement('div');
+    descDiv.className = 'card-overlay-desc';
+    descDiv.textContent = descEl ? descEl.textContent.trim() : '';
+
+    const linksDiv = document.createElement('div');
+    linksDiv.className = 'card-overlay-links';
+
+    if (codeLink) {
+        const a = document.createElement('a');
+        a.className = 'card-overlay-link code';
+        a.href = codeLink.href;
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+        a.innerHTML = '&#60;/&#62; Code';
+        linksDiv.appendChild(a);
+    }
+    if (liveLink) {
+        const a = document.createElement('a');
+        a.className = 'card-overlay-link live';
+        a.href = liveLink.href;
+        a.target = '_blank';
+        a.rel = 'noreferrer';
+        a.innerHTML = '&#9654; Live';
+        linksDiv.appendChild(a);
+    }
+
+    overlay.appendChild(titleDiv);
+    overlay.appendChild(descDiv);
+    overlay.appendChild(linksDiv);
+    card.appendChild(overlay);
+});
+
+// === FEATURE 6: EASTER EGG — type "hireme" ===
+(function () {
+    const target = 'hireme';
+    let typed = '';
+    const overlay = document.getElementById('hire-me-overlay');
+    const closeBtn = document.getElementById('hire-me-close');
+    const ctaBtn   = document.getElementById('hire-me-cta');
+
+    if (!overlay) return;
+
+    function showOverlay() {
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        closeBtn && closeBtn.focus();
+    }
+    function hideOverlay() {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+        typed = '';
+    }
+
+    document.addEventListener('keydown', e => {
+        // Only track plain key presses (no Ctrl/Alt/Meta)
+        if (e.ctrlKey || e.altKey || e.metaKey) return;
+        if (e.key.length !== 1) return;
+        typed += e.key.toLowerCase();
+        if (typed.length > target.length) typed = typed.slice(-target.length);
+        if (typed === target) showOverlay();
+    });
+
+    closeBtn && closeBtn.addEventListener('click', hideOverlay);
+    overlay.addEventListener('click', e => { if (e.target === overlay) hideOverlay(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideOverlay(); });
+    ctaBtn && ctaBtn.addEventListener('click', hideOverlay);
+})();
