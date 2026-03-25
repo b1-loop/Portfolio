@@ -255,11 +255,32 @@ themeToggle.addEventListener('click', () => {
 const skillsTabs = document.querySelectorAll('.skills-tab');
 const skillsContents = document.querySelectorAll('.skills-tab-content');
 
+function getSkillLevel(pct) {
+    if (pct >= 90) return { label: 'Expert',   cls: 'expert'   };
+    if (pct >= 75) return { label: 'Advanced', cls: 'advanced' };
+    if (pct >= 55) return { label: 'Mid',      cls: 'mid'      };
+    return                 { label: 'Learning', cls: 'beginner' };
+}
+
 function animateSkillBars(container) {
-    container.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
-        const width = bar.getAttribute('data-width');
+    container.querySelectorAll('.skill-bar-item').forEach((item, i) => {
+        const bar = item.querySelector('.skill-bar-fill');
+        const pctEl = item.querySelector('.skill-bar-pct');
+        if (!bar || !pctEl) return;
+
+        const width = parseInt(bar.getAttribute('data-width'), 10);
         bar.style.width = '0';
-        setTimeout(() => { bar.style.width = width + '%'; }, i * 90);
+
+        // Inject level badge if not already there
+        if (!pctEl.querySelector('.skill-level')) {
+            const lvl = getSkillLevel(width);
+            const badge = document.createElement('span');
+            badge.className = `skill-level ${lvl.cls}`;
+            badge.textContent = lvl.label;
+            pctEl.appendChild(badge);
+        }
+
+        setTimeout(() => { bar.style.width = width + '%'; }, i * 100);
     });
 }
 
