@@ -354,12 +354,12 @@ if (cursorGlow) {
 // === HERO TERMINAL ANIMATION ===
 const terminalBody = document.getElementById('terminal-body');
 const termLines = [
-    { type: 'cmd', text: 'dotnet new webapi -n CleanAPI' },
+    { type: 'cmd', text: 'dotnet new webapi' },
     { type: 'out', text: 'Build succeeded ✓' },
-    { type: 'cmd', text: 'git commit -m "feat: clean architecture"' },
-    { type: 'out', text: '[main] 1 commit · ready to ship 🚀' },
-    { type: 'cmd', text: 'docker-compose up --build' },
-    { type: 'out', text: 'Container running on :5000 ✓' },
+    { type: 'cmd', text: 'git commit -m "feat: api"' },
+    { type: 'out', text: '[main] ready to ship 🚀' },
+    { type: 'cmd', text: 'docker-compose up' },
+    { type: 'out', text: 'Running on :5000 ✓' },
 ];
 
 let termLineIdx = 0;
