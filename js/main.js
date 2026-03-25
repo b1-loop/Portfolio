@@ -402,107 +402,111 @@ const constellationWrap = document.getElementById('constellation');
 const cSvg = document.getElementById('c-svg');
 
 const cNodes = [
-    { id: 'cs',      label: 'C#',           x: 50,  y: 20,  color: '#a78bfa' },
-    { id: 'net',     label: '.NET',          x: 30,  y: 45,  color: '#8b5cf6' },
-    { id: 'asp',     label: 'ASP.NET',       x: 70,  y: 45,  color: '#7c3aed' },
-    { id: 'ef',      label: 'EF Core',       x: 20,  y: 70,  color: '#6d28d9' },
-    { id: 'sql',     label: 'SQL',           x: 50,  y: 72,  color: '#06b6d4' },
-    { id: 'react',   label: 'React',         x: 78,  y: 68,  color: '#38bdf8' },
-    { id: 'docker',  label: 'Docker',        x: 15,  y: 50,  color: '#67e8f9' },
-    { id: 'git',     label: 'Git',           x: 85,  y: 30,  color: '#4ade80' },
-    { id: 'azure',   label: 'Azure',         x: 62,  y: 15,  color: '#60a5fa' },
-    { id: 'js',      label: 'JavaScript',    x: 88,  y: 55,  color: '#fbbf24' },
+    // Row 1 — DevOps / cloud
+    { id: 'git',    label: 'Git',           icon: 'devicon-git-plain colored',                color: '#fb923c', x: 8,  y: 9  },
+    { id: 'azure',  label: 'Azure',         icon: 'devicon-azure-plain colored',               color: '#60a5fa', x: 28, y: 7  },
+    { id: 'cs',     label: 'C#',            icon: 'devicon-csharp-plain colored',              color: '#a78bfa', x: 50, y: 9  },
+    { id: 'blazor', label: 'Blazor',        emoji: '⚡',                                       color: '#c084fc', x: 72, y: 7  },
+    { id: 'github', label: 'GitHub',        icon: 'devicon-github-original',                   color: '#e5e7eb', x: 91, y: 9  },
+    // Row 2 — Backend core
+    { id: 'docker', label: 'Docker',        icon: 'devicon-docker-plain colored',              color: '#67e8f9', x: 8,  y: 33 },
+    { id: 'net',    label: '.NET',          icon: 'devicon-dotnetcore-plain colored',          color: '#8b5cf6', x: 28, y: 31 },
+    { id: 'asp',    label: 'ASP.NET',       icon: 'devicon-dot-net-plain colored',             color: '#7c3aed', x: 50, y: 33 },
+    { id: 'react',  label: 'React',         icon: 'devicon-react-original colored',            color: '#61dafb', x: 72, y: 31 },
+    { id: 'ts',     label: 'TypeScript',    icon: 'devicon-typescript-plain colored',          color: '#3b82f6', x: 91, y: 33 },
+    // Row 3 — Data
+    { id: 'ef',     label: 'EF Core',       emoji: '🗄️',                                     color: '#6d28d9', x: 8,  y: 58 },
+    { id: 'sql',    label: 'SQL Server',    icon: 'devicon-microsoftsqlserver-plain colored',  color: '#06b6d4', x: 28, y: 56 },
+    { id: 'pg',     label: 'PostgreSQL',    icon: 'devicon-postgresql-plain colored',          color: '#38bdf8', x: 50, y: 58 },
+    { id: 'js',     label: 'JavaScript',    icon: 'devicon-javascript-plain colored',          color: '#fbbf24', x: 72, y: 56 },
+    { id: 'html',   label: 'HTML / CSS',    icon: 'devicon-html5-plain colored',               color: '#f97316', x: 91, y: 58 },
+    // Row 4 — Extra
+    { id: 'python', label: 'Python',        icon: 'devicon-python-plain colored',              color: '#4ade80', x: 19, y: 83 },
+    { id: 'cqrs',   label: 'CQRS / Clean',  emoji: '🏛️',                                     color: '#e879f9', x: 50, y: 83 },
+    { id: 'openai', label: 'OpenAI API',    emoji: '🤖',                                       color: '#34d399', x: 80, y: 83 },
 ];
 
 const cEdges = [
-    ['cs','net'],['cs','asp'],['cs','azure'],['cs','git'],
-    ['net','asp'],['net','ef'],['net','docker'],
-    ['asp','sql'],['asp','react'],
-    ['ef','sql'],
-    ['react','js'],['react','git'],
-    ['sql','docker'],
-    ['azure','git'],['azure','docker'],
-    ['js','git'],
+    ['cs','net'],['cs','asp'],['cs','azure'],['cs','blazor'],['cs','git'],
+    ['net','asp'],['net','ef'],['net','docker'],['net','cqrs'],
+    ['asp','sql'],['asp','react'],['asp','blazor'],['asp','cqrs'],
+    ['ef','sql'],['ef','pg'],
+    ['sql','pg'],
+    ['react','js'],['react','ts'],['react','html'],
+    ['js','ts'],['js','html'],
+    ['docker','azure'],['docker','git'],
+    ['azure','github'],['git','github'],
+    ['python','sql'],['python','pg'],['python','openai'],
+    ['openai','react'],['openai','asp'],
+    ['ts','react'],['blazor','react'],
 ];
 
 function buildConstellation() {
     if (!constellationWrap || !cSvg) return;
-    const W = constellationWrap.clientWidth || 400;
-    const H = constellationWrap.clientHeight || 280;
-    cSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     cSvg.innerHTML = '';
+    constellationWrap.querySelectorAll('.c-node').forEach(el => el.remove());
+
+    const W = constellationWrap.clientWidth || 520;
+    const H = constellationWrap.clientHeight || 380;
+    cSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
     const pos = {};
     cNodes.forEach(n => {
         pos[n.id] = { x: (n.x / 100) * W, y: (n.y / 100) * H };
     });
 
-    // Draw edges
+    // SVG edges
+    const edgeEls = [];
     cEdges.forEach(([a, b]) => {
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
         line.setAttribute('x1', pos[a].x);
         line.setAttribute('y1', pos[a].y);
         line.setAttribute('x2', pos[b].x);
         line.setAttribute('y2', pos[b].y);
-        line.setAttribute('stroke', 'rgba(139,92,246,0.25)');
-        line.setAttribute('stroke-width', '1');
         line.classList.add('c-edge');
         cSvg.appendChild(line);
+        edgeEls.push({ el: line, a, b });
     });
 
-    // Draw nodes
+    // HTML nodes (use existing CSS classes)
     cNodes.forEach(n => {
-        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        g.classList.add('c-node');
-        g.setAttribute('data-id', n.id);
+        const node = document.createElement('div');
+        node.className = 'c-node';
+        node.style.left = pos[n.id].x + 'px';
+        node.style.top  = pos[n.id].y + 'px';
 
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', pos[n.id].x);
-        circle.setAttribute('cy', pos[n.id].y);
-        circle.setAttribute('r', '7');
-        circle.setAttribute('fill', n.color);
-        circle.setAttribute('filter', 'url(#node-glow)');
+        const iconEl = document.createElement('div');
+        iconEl.className = 'c-icon';
+        iconEl.style.setProperty('--node-color', n.color);
 
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', pos[n.id].x);
-        text.setAttribute('y', pos[n.id].y + 19);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('fill', '#e5e7eb');
-        text.setAttribute('font-size', '10');
-        text.setAttribute('font-family', 'Poppins, sans-serif');
-        text.textContent = n.label;
+        if (n.icon) {
+            const i = document.createElement('i');
+            i.className = n.icon;
+            iconEl.appendChild(i);
+        } else {
+            iconEl.textContent = n.emoji;
+        }
 
-        g.appendChild(circle);
-        g.appendChild(text);
+        const labelEl = document.createElement('div');
+        labelEl.className = 'c-label';
+        labelEl.textContent = n.label;
 
-        g.addEventListener('mouseenter', () => {
-            circle.setAttribute('r', '10');
-            // Highlight connected edges
-            cEdges.forEach(([a, b], i) => {
-                if (a === n.id || b === n.id) {
-                    cSvg.querySelectorAll('.c-edge')[i].setAttribute('stroke', 'rgba(139,92,246,0.7)');
-                    cSvg.querySelectorAll('.c-edge')[i].setAttribute('stroke-width', '1.5');
-                }
+        node.appendChild(iconEl);
+        node.appendChild(labelEl);
+
+        node.addEventListener('mouseenter', () => {
+            node.classList.add('lit');
+            edgeEls.forEach(({ el, a, b }) => {
+                if (a === n.id || b === n.id) el.classList.add('lit');
             });
         });
-        g.addEventListener('mouseleave', () => {
-            circle.setAttribute('r', '7');
-            cSvg.querySelectorAll('.c-edge').forEach(e => {
-                e.setAttribute('stroke', 'rgba(139,92,246,0.25)');
-                e.setAttribute('stroke-width', '1');
-            });
+        node.addEventListener('mouseleave', () => {
+            node.classList.remove('lit');
+            edgeEls.forEach(({ el }) => el.classList.remove('lit'));
         });
 
-        cSvg.appendChild(g);
+        constellationWrap.appendChild(node);
     });
-
-    // SVG filter for node glow
-    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    defs.innerHTML = `<filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>`;
-    cSvg.insertBefore(defs, cSvg.firstChild);
 }
 
 // Build when Map tab is clicked
