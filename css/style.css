@@ -1154,10 +1154,27 @@ section {
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
-    background: linear-gradient(90deg, #a855f7, #ec4899);
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
     -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     display: inline-block;
+}
+
+[data-theme="light"] .section-title {
+    background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="neon"] .section-title {
+    background: linear-gradient(135deg, #d580ff 0%, #ff3ea5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
 }
 
 .section-subtitle {
@@ -3282,6 +3299,298 @@ body::after {
 .hire-me-close:hover {
     color: var(--text);
     transform: scale(1.2);
+}
+
+/* ===================================================================
+   FEATURE 4 — FEATURED PROJECT SPOTLIGHT
+   =================================================================== */
+.featured-project {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.featured-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-soft), 0 0 40px rgba(139, 92, 246, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.featured-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.featured-inner:hover {
+    border-color: rgba(139, 92, 246, 0.45);
+    box-shadow: var(--shadow-soft), 0 0 60px rgba(139, 92, 246, 0.14);
+}
+
+.featured-img-wrap {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.featured-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.featured-inner:hover .featured-img {
+    transform: scale(1.03);
+}
+
+.featured-live-pill {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    color: #4ade80;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+}
+
+.featured-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.featured-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.featured-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.featured-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.featured-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.featured-code-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+}
+
+@media (max-width: 700px) {
+    .featured-inner {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        padding: 1.25rem;
+    }
+}
+
+[data-theme="light"] .featured-inner {
+    border-color: rgba(124, 58, 237, 0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+
+[data-theme="neon"] .featured-inner {
+    border-color: rgba(180, 77, 255, 0.3);
+    box-shadow: 0 0 40px rgba(180, 77, 255, 0.1);
+}
+
+/* ===================================================================
+   FEATURE 6 — BUILT WITH HOVER ICONS (in card overlay)
+   =================================================================== */
+.card-overlay-icons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.2rem;
+}
+
+.card-overlay-icon {
+    font-size: 1.3rem;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.4));
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.card-overlay-icon:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* ===================================================================
+   FEATURE 7 — GRADIENT HERO TITLE ACCENT (polish)
+   =================================================================== */
+.hero-title span {
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .hero-title span {
+    background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===================================================================
+   FEATURE 8 — SKILL RINGS (conic-gradient)
+   =================================================================== */
+@property --ring-pct {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+}
+
+.skill-ring-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-ring {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--accent) var(--ring-pct),
+        rgba(255, 255, 255, 0.08) 0
+    );
+    transition: --ring-pct 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-ring::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: var(--card);
+}
+
+.skill-ring-pct {
+    position: absolute;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--text);
+    z-index: 1;
+    line-height: 1;
+}
+
+.skill-ring-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.skill-ring-name i {
+    font-size: 1rem;
+}
+
+[data-theme="neon"] .skill-ring {
+    background: conic-gradient(
+        #b44dff var(--ring-pct),
+        rgba(255, 255, 255, 0.06) 0
+    );
+    box-shadow: 0 0 8px rgba(180, 77, 255, 0.3);
+}
+
+/* ===================================================================
+   FEATURE 12 — SCROLL-TRIGGERED KEYWORD HIGHLIGHT
+   =================================================================== */
+.hl-word {
+    position: relative;
+    color: inherit;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.hl-word::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), #ec4899);
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+.hl-word.lit {
+    color: var(--accent-bright);
+}
+
+.hl-word.lit::after {
+    width: 100%;
+}
+
+[data-theme="light"] .hl-word.lit {
+    color: #7c3aed;
+}
+
+[data-theme="neon"] .hl-word.lit {
+    color: #d580ff;
+}
+
+[data-theme="neon"] .hl-word::after {
+    background: linear-gradient(90deg, #b44dff, #ff3ea5);
 }
 
 [data-theme="neon"] .hire-me-box {

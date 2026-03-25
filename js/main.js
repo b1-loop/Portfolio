@@ -282,6 +282,34 @@ function animateSkillBars(container) {
             pctEl.appendChild(badge);
         }
 
+        // Inject skill ring (Feature 8) if not already there
+        if (!item.querySelector('.skill-ring-wrap')) {
+            const nameEl = item.querySelector('.skill-bar-name');
+            const ringWrap = document.createElement('div');
+            ringWrap.className = 'skill-ring-wrap';
+
+            const ring = document.createElement('div');
+            ring.className = 'skill-ring';
+            ring.style.setProperty('--ring-pct', '0%');
+
+            const ringPctLabel = document.createElement('span');
+            ringPctLabel.className = 'skill-ring-pct';
+            ringPctLabel.textContent = width + '%';
+            ring.appendChild(ringPctLabel);
+
+            const ringName = document.createElement('div');
+            ringName.className = 'skill-ring-name';
+            ringName.innerHTML = nameEl ? nameEl.innerHTML : '';
+
+            ringWrap.appendChild(ring);
+            ringWrap.appendChild(ringName);
+            item.insertBefore(ringWrap, item.querySelector('.skill-bar-header'));
+
+            setTimeout(() => {
+                ring.style.setProperty('--ring-pct', width + '%');
+            }, i * 100 + 50);
+        }
+
         setTimeout(() => { bar.style.width = width + '%'; }, i * 100);
     });
 }
@@ -579,12 +607,36 @@ console.log(
     "color: #e5e7eb; font-size: 14px;"
 );
 
-// === FEATURE 2: PROJECT CARD SLIDE-UP OVERLAY ===
+// === FEATURE 2 + 6: PROJECT CARD SLIDE-UP OVERLAY + BUILT-WITH ICONS ===
+const tagIconMap = {
+    'c# / .net':        'devicon-csharp-plain colored',
+    'c#':               'devicon-csharp-plain colored',
+    '.net':             'devicon-dotnetcore-plain colored',
+    '.net 8':           'devicon-dotnetcore-plain colored',
+    'asp.net core':     'devicon-dot-net-plain colored',
+    'web api':          'devicon-dot-net-plain colored',
+    'react':            'devicon-react-original colored',
+    'javascript/react': 'devicon-react-original colored',
+    'javascript':       'devicon-javascript-plain colored',
+    'typescript':       'devicon-typescript-plain colored',
+    'sql server':       'devicon-microsoftsqlserver-plain colored',
+    'sql':              'devicon-microsoftsqlserver-plain colored',
+    'docker':           'devicon-docker-plain colored',
+    'azure':            'devicon-azure-plain colored',
+    'git':              'devicon-git-plain colored',
+    'postgresql':       'devicon-postgresql-plain colored',
+    'python':           'devicon-python-plain colored',
+    'blazor':           'devicon-blazor-original colored',
+    'html / css':       'devicon-html5-plain colored',
+    'frontend':         'devicon-html5-plain colored',
+};
+
 document.querySelectorAll('.project-card').forEach(card => {
-    const titleEl = card.querySelector('.project-title');
-    const descEl  = card.querySelector('.project-description');
+    const titleEl  = card.querySelector('.project-title');
+    const descEl   = card.querySelector('.project-description');
     const codeLink = card.querySelector('.project-link:not(.live)');
     const liveLink = card.querySelector('.project-link.live');
+    const tagEls   = card.querySelectorAll('.project-tag');
 
     const overlay = document.createElement('div');
     overlay.className = 'card-overlay';
@@ -592,6 +644,22 @@ document.querySelectorAll('.project-card').forEach(card => {
     const titleDiv = document.createElement('div');
     titleDiv.className = 'card-overlay-title';
     titleDiv.textContent = titleEl ? titleEl.textContent : '';
+
+    // Built-with icons (Feature 6)
+    const iconsDiv = document.createElement('div');
+    iconsDiv.className = 'card-overlay-icons';
+    let hasIcons = false;
+    tagEls.forEach(tag => {
+        const key = tag.textContent.trim().toLowerCase();
+        const iconCls = tagIconMap[key];
+        if (iconCls) {
+            const i = document.createElement('i');
+            i.className = `card-overlay-icon ${iconCls}`;
+            i.title = tag.textContent.trim();
+            iconsDiv.appendChild(i);
+            hasIcons = true;
+        }
+    });
 
     const descDiv = document.createElement('div');
     descDiv.className = 'card-overlay-desc';
@@ -620,6 +688,7 @@ document.querySelectorAll('.project-card').forEach(card => {
     }
 
     overlay.appendChild(titleDiv);
+    if (hasIcons) overlay.appendChild(iconsDiv);
     overlay.appendChild(descDiv);
     overlay.appendChild(linksDiv);
     card.appendChild(overlay);
@@ -659,4 +728,25 @@ document.querySelectorAll('.project-card').forEach(card => {
     overlay.addEventListener('click', e => { if (e.target === overlay) hideOverlay(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') hideOverlay(); });
     ctaBtn && ctaBtn.addEventListener('click', hideOverlay);
+})();
+
+// === FEATURE 12: SCROLL-TRIGGERED KEYWORD HIGHLIGHT ===
+(function () {
+    const hlWords = document.querySelectorAll('.hl-word');
+    if (!hlWords.length) return;
+
+    const hlObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const words = entry.target.querySelectorAll('.hl-word');
+                words.forEach((word, i) => {
+                    setTimeout(() => word.classList.add('lit'), i * 120 + 100);
+                });
+                hlObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    const aboutText = document.querySelector('.about-text');
+    if (aboutText) hlObserver.observe(aboutText);
 })();
